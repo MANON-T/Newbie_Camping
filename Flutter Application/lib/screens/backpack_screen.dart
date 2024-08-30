@@ -498,7 +498,8 @@ class _BackpackState extends State<Backpack> {
                             if (snapshot.connectionState ==
                                 ConnectionState.waiting) {
                               return const CardLoading(
-                                height: 100,
+                                height: 120,
+                                width: 200,
                                 borderRadius:
                                     BorderRadius.all(Radius.circular(10)),
                                 margin: EdgeInsets.only(bottom: 10),
@@ -516,7 +517,8 @@ class _BackpackState extends State<Backpack> {
                                     if (snapshot.connectionState ==
                                         ConnectionState.waiting) {
                                       return const CardLoading(
-                                        height: 100,
+                                        height: 120,
+                                        width: 200,
                                         borderRadius: BorderRadius.all(
                                             Radius.circular(10)),
                                         margin: EdgeInsets.only(bottom: 10),

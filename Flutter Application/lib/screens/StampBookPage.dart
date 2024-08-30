@@ -55,10 +55,8 @@ class _StampbookpageState extends State<Stampbookpage> {
               stream: db.getAllMedalStream(),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const CardLoading(
-                    height: 100,
-                    borderRadius: BorderRadius.all(Radius.circular(10)),
-                    margin: EdgeInsets.only(bottom: 10),
+                  return const CircularProgressIndicator(
+                    color: Colors.green,
                   );
                 } else if (snapshot.hasError) {
                   return Text(

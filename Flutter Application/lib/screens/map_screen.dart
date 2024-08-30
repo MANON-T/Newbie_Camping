@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'package:card_loading/card_loading.dart';
 import 'package:flutter_application_4/models/campsite_model.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -129,11 +128,7 @@ class _MapScreenState extends State<MapScreen> {
         children: [
           _currentP == null
               ? const Center(
-                  child: CardLoading(
-                  height: 100,
-                  borderRadius: BorderRadius.all(Radius.circular(10)),
-                  margin: EdgeInsets.only(bottom: 10),
-                ))
+                  child: CircularProgressIndicator(color: Colors.green,))
               : GoogleMap(
                   onMapCreated: (GoogleMapController controller) =>
                       _mapController.complete(controller),

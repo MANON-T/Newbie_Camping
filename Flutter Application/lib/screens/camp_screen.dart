@@ -168,11 +168,7 @@ class _CampScreen extends State<CampScreen> {
               stream: db.getAllCampsiteStream(),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const CardLoading(
-                    height: 100,
-                    borderRadius: BorderRadius.all(Radius.circular(10)),
-                    margin: EdgeInsets.only(bottom: 10),
-                  );
+                  return const CircularProgressIndicator(color: Colors.green,);
                 } else if (snapshot.hasError) {
                   return Text(
                     'เกิดข้อผิดพลาด: ${snapshot.error}',
@@ -237,7 +233,7 @@ class _CampScreen extends State<CampScreen> {
                                       if (snapshot.connectionState ==
                                           ConnectionState.waiting) {
                                         return const CardLoading(
-                                          height: 100,
+                                          height: 110,
                                           borderRadius: BorderRadius.all(
                                               Radius.circular(10)),
                                           margin: EdgeInsets.only(bottom: 10),
@@ -307,7 +303,7 @@ class _CampScreen extends State<CampScreen> {
                                     if (snapshot.connectionState ==
                                         ConnectionState.waiting) {
                                       return const CardLoading(
-                                        height: 100,
+                                        height: 40,
                                         borderRadius: BorderRadius.all(
                                             Radius.circular(10)),
                                         margin: EdgeInsets.only(bottom: 10),
@@ -652,11 +648,7 @@ class CampsiteSearchDelegate extends SearchDelegate {
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(
-              child: CardLoading(
-                height: 100,
-                borderRadius: BorderRadius.all(Radius.circular(10)),
-                margin: EdgeInsets.only(bottom: 10),
-              ),
+              child: CircularProgressIndicator(color: Colors.green,)
             );
           } else if (snapshot.hasError) {
             return const Center(

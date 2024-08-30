@@ -52,7 +52,7 @@ class _TipReadScreenState extends State<TipReadScreen> {
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return const CardLoading(
-                      height: 100,
+                      height: 190,
                       borderRadius: BorderRadius.all(Radius.circular(10)),
                       margin: EdgeInsets.only(bottom: 10),
                     );

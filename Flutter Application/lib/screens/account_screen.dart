@@ -8,7 +8,6 @@ import 'package:flutter_application_4/Widgets/backpack.dart';
 import 'package:flutter_application_4/Widgets/budget.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_application_4/screens/StampBookPage.dart';
-import 'package:card_loading/card_loading.dart';
 
 const kSpotifyBackground = Color(0xFF121212);
 const kSpotifyAccent = Color(0xFF1DB954);
@@ -604,30 +603,31 @@ class _AccountScreenState extends State<AccountScreen> {
                   (route) => false,
                 );
               } else if (result == 'stampbook') {
-                // เพิ่มการทำงานที่เกี่ยวข้องกับตัวเลือก "สมุดตราปั้ม"
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => Stampbookpage(
-                            userID: widget.user,
-                          )), // หน้าสมุดตราปั้ม
+                    builder: (context) => Stampbookpage(
+                      userID: widget.user,
+                    ),
+                  ),
                 );
               }
             },
             itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
-              const PopupMenuItem<String>(
-                value: 'stampbook',
-                child: Row(
-                  children: [
-                    Icon(Icons.book, color: Colors.black),
-                    SizedBox(width: 10),
-                    Text(
-                      'สมุดตราปั้ม',
-                      style: TextStyle(fontFamily: 'Itim', fontSize: 17),
-                    ),
-                  ],
+              if (!widget.isAnonymous)
+                const PopupMenuItem<String>(
+                  value: 'stampbook',
+                  child: Row(
+                    children: [
+                      Icon(Icons.book, color: Colors.black),
+                      SizedBox(width: 10),
+                      Text(
+                        'สมุดตราปั้ม',
+                        style: TextStyle(fontFamily: 'Itim', fontSize: 17),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
               const PopupMenuItem<String>(
                 value: 'logout',
                 child: Row(
@@ -664,12 +664,9 @@ class _AccountScreenState extends State<AccountScreen> {
                   }
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return const Center(
-                      child: CardLoading(
-                        height: 100,
-                        borderRadius: BorderRadius.all(Radius.circular(10)),
-                        margin: EdgeInsets.only(bottom: 10),
-                      ),
-                    );
+                        child: CircularProgressIndicator(
+                      color: Colors.green,
+                    ));
                   }
 
                   if (!snapshot.hasData || !snapshot.data!.exists) {
@@ -923,7 +920,7 @@ class _AccountScreenState extends State<AccountScreen> {
             style: TextStyle(color: kSpotifyTextPrimary, fontFamily: 'Itim'),
           ),
           content: const Text(
-            'ระบบการ์ดชาวแคมป์ให้บริการเฉพาะผู้ที่เข้าสู่ระบบด้วย Email/Password เท่านั้น.',
+            'ระบบการ์ดชาวแคมป์ให้บริการเฉพาะผู้ที่เข้าสู่ระบบเท่านั้น',
             style: TextStyle(
                 color: kSpotifyTextSecondary, fontFamily: 'Itim', fontSize: 17),
           ),

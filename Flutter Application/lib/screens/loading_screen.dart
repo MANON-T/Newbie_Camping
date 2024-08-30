@@ -1,4 +1,3 @@
-import 'package:card_loading/card_loading.dart';
 import 'package:flutter/material.dart';
 
 class LoadingScreen extends StatelessWidget {
@@ -8,11 +7,7 @@ class LoadingScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Scaffold(
       body: Center(
-        child: CardLoading(
-          height: 100,
-          borderRadius: BorderRadius.all(Radius.circular(10)),
-          margin: EdgeInsets.only(bottom: 10),
-        ),
+        child: CircularProgressIndicator(color: Colors.green,),
       ),
     );
   }

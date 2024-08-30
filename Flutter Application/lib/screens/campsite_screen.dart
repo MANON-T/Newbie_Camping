@@ -155,7 +155,7 @@ class _CampsiteScreenState extends State<CampsiteScreen> {
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return const CardLoading(
-                    height: 100,
+                    height: 190,
                     borderRadius: BorderRadius.all(Radius.circular(10)),
                     margin: EdgeInsets.only(bottom: 10),
                   );
@@ -205,7 +205,7 @@ class _CampsiteScreenState extends State<CampsiteScreen> {
             builder: (BuildContext context, AsyncSnapshot<Weather> snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return const CardLoading(
-                  height: 100,
+                  height: 40,
                   borderRadius: BorderRadius.all(Radius.circular(10)),
                   margin: EdgeInsets.only(bottom: 10),
                 );

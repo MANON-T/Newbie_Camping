@@ -542,7 +542,7 @@ class _PackYourBagsState extends State<PackYourBags> {
                       const Divider(color: kSpotifyTextSecondary),
                       CheckboxListTile(
                         title: const Text(
-                          'ตั้งแคมป์',
+                          'ตั้งเต็นท์',
                           style: TextStyle(
                               color: kSpotifyTextPrimary,
                               fontSize: 20.0,
@@ -561,7 +561,7 @@ class _PackYourBagsState extends State<PackYourBags> {
                         controlAffinity: ListTileControlAffinity.leading,
                         activeColor: kSpotifyAccent,
                       ),
-                      if (_campingChecked)
+                      if (_campingChecked && widget.campsite.tentService)
                         CheckboxListTile(
                           title: const Text(
                             'ต้องการเช่าเต็นท์',

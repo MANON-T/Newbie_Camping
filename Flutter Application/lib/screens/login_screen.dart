@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'package:card_loading/card_loading.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
@@ -175,11 +174,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget _buildContent() {
     return _isLoading
         ? const Center(
-            child: CardLoading(
-            height: 100,
-            borderRadius: BorderRadius.all(Radius.circular(10)),
-            margin: EdgeInsets.only(bottom: 10),
-          ))
+            child: CircularProgressIndicator(color: Colors.green,))
         : Column(
             children: [
               Text(
