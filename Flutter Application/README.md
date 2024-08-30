@@ -11,7 +11,7 @@ Android package name ของโปรเจคนี้คือ    `com.examp
 
 > Firebase  Storage
 
-![enter image description here](https://github.com/MANON-T/Newbie_Camping/tree/main/Tutorial%20Material/Firebase%20Storage%20bar)
+![enter image description here](https://github.com/MANON-T/Newbie_Camping/blob/main/Tutorial%20Material/Firebase%20Storage%20bar/File.png)
 
 เป็นบริการในการจัดเก็บไฟล์ของทาง Firebase เราจะนำไฟล์รูปภาพที่จำเป็นย้ายมาเก็บไว้ในนี้ เนื่องจาก Flutter นั้นต้อง Build ใหม่ทุกครั้งที่มีการเปลี่ยนแปลงของโด้ดทำให้ไม่ยืดหยุ่นพอหากจะเก็บไฟล์รูปภาพที่มีการเปลี่ยนแปลงบ่อยไว้ในโฟล์เดอร์ image โดยรูปภาพที่จะจัดเก็บใน Firebase  Storage นั้นตัวผู้เขียนได้อัพลงโฟลเดอร์ Firebase Storage แล้วสามารถดาวน์โหลดไปใช้งานได้เลย โดยจะมีอยู่ 3 ส่วน
 
