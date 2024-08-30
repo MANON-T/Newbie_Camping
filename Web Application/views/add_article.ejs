@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Article Form</title>
+    <link rel="stylesheet" href="css/add_articleStyles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <nav>
+        <div class="menu">
+            <div class="menu_links">
+                <a href="/article" class="link"><i class="fa-solid fa-arrow-left"></i></a>
+                <a href="/" class="link">Home</a>
+            </div>
+            <div class="menu_links">
+                <a href="/add_form" class="link"><i class="fa-solid fa-circle-plus"></i> Add a location</a>
+                <a href="" class="link"><i class="fa-solid fa-circle-plus"></i> Write a tip</a>
+                <a href="/medal_manage" class="link"><i class="fa-solid fa-list-check"></i> Manage stamps</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="progress-indicator">
+            <div id="progress-bar"></div>
+            <span id="step-indicator">Step 1 of 3</span>
+        </div>
+
+        <div class="form-card">
+            <form action="/addTip" method="post" id="dynamicForm" enctype="multipart/form-data">
+                <!-- Step 1: General Information -->
+                <div class="form-step" id="step-1">
+                    <div class="title">
+                        <div id="preview-container">
+                            <img id="image-preview" src="" alt="Image Preview"
+                                style="display: none; width: 50%; height: auto; margin-bottom: 10px; margin: auto;" />
+                        </div>
+                        <br>
+                        <button type="button" class="custom-btn" id="upload-button"
+                            onclick="document.getElementById('file-input').click();">
+                            <i class="fa-solid fa-book"></i>
+                            Choose cover photo
+                        </button>
+                        <input type="file" id="file-input" name="image" accept="image/*" style="display: none;"
+                            onchange="previewImage(event)">
+                    </div>
+                </div>
+
+                <!-- Step 2: Fees -->
+                <div class="form-step" id="step-2" style="display: none;">
+                    <br>
+                    <label for="">Topic:</label>
+                    <input type="text" name="topic" id="">
+                </div>
+
+                <!-- Step 3: Additional Services -->
+                <div class="form-step" id="step-3" style="display: none;">
+                    <br>
+                    <label for="">Description:</label>
+                    <textarea name="description" id="" rows="20" cols="100"></textarea>
+                </div>
+
+                <!-- Navigation Buttons -->
+                <div class="form-navigation">
+                    <button type="button" id="back-button" style="display: none;" onclick="prevStep()">Back</button>
+                    <button type="button" id="next-button" onclick="nextStep()">Next</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/add_articleScript.js"></script>
+</body>
+
+</html>

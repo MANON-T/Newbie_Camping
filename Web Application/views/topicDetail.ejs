@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <% tip.forEach(tip=> { %>
+        <title><%= tip.topic %></title>
+    <% }); %>
+    <link rel="stylesheet" href="css/topicDetailStyles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <nav>
+        <div class="menu">
+            <div class="menu_links">
+                <a href="/article" class="link"><i class="fa-solid fa-arrow-left"></i></a>
+                <a href="/" class="link">Home</a>
+            </div>
+        </div>
+    </nav>
+
+    <div>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+    </div>
+
+    <% tip.forEach(tip => { %>
+        <div class="container">
+            <div class="to-center">
+                <h2><%= tip.topic %></h2>
+                <br>
+                <img src="<%= tip.imageURL %>" alt="รูปภาพ">
+                <div class="date-time"><%= tip.formattedDate %></div>
+            </div>
+            <div class="content">
+                <p><%= tip.description %></p>
+            </div>
+            <button id="editButton" class="custom-btn">Edit</button>
+        </div>
+    
+        <!-- Popup สำหรับแก้ไขข้อมูล -->
+        <div id="editPopup" class="popup">
+            <div class="popup-content">
+                <span id="closePopup" class="close">&times;</span>
+                <h2>Edit Tip</h2>
+                <form id="editForm" action="/updatearticle/<%= tip.topic %>" method="POST" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label for="image">Select new cover:</label>
+                        <input type="file" id="image" name="image" accept="image/*">
+                        <img id="imagePreview" src="#"  class="image-preview">
+                    </div>
+                    <div class="form-group">
+                        <label for="newTopic">Edit topic:</label>
+                        <input type="text" id="newTopic" name="newTopic" value="<%= tip.topic %>" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="newDescription">Edit description:</label>
+                        <textarea id="newDescription" name="newDescription" required><%= tip.description %></textarea>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn-save">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div>        
+    <% }); %>
+    <!-- Jquery needed -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="js/topicDetailScript.js"></script>
+</body>
+
+</html>

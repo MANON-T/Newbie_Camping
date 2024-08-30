@@ -1,0 +1,2 @@
+const String GOOGLE_API_KEY = "YOUR API KEY";
+const String OPENWEATER_API_KEY = "YOUR API KEY";

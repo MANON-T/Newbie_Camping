@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Campsite</title>
+    <link rel="stylesheet" href="css/campsiteStyles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-137426789-2');
+    </script>
+</head>
+
+<body cz-shortcut-listen="true">
+    <nav>
+        <div class="menu">
+            <div class="menu_links">
+                <a href="/" class="link">Home</a>
+            </div>
+            <!-- <p class="website_name">Newbie Camping</p> -->
+            <div class="menu_links">
+                <a href="/add_form" class="link"><i class="fa-solid fa-circle-plus"></i> Add a location</a>
+                <a href="/article" class="link"><i class="fa-solid fa-newspaper"></i> Tip</a>
+                <a href="/medal_manage" class="link"><i class="fa-solid fa-list-check"></i> Manage stamps</a>
+            </div>
+            <div class="menu_icon">
+                <span class="icon"></span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="wrapper">
+        <div class="content">
+            <% campsite.forEach(campsite => { %>
+              <div class="card" onclick="goToDetail('<%= campsite.name %>')">
+                <figure class="card__imageBg">
+                  <img src="<%= campsite.imageURL %>" alt="<%= campsite.name %>">
+                </figure>
+                <article class="card__text">
+                  <h2 class="card__title">
+                    <%= campsite.name %>
+                  </h2>
+                </article>
+              </div>
+            <% }); %>
+          </div>
+    </div>
+
+    <!-- Jquery needed -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="js/campsiteScript.js"></script>
+    <script>
+        function goToDetail(campsiteName) {
+            const form = document.createElement('form');
+            form.method = 'POST';
+            form.action = '/setSession';
+
+            const input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = 'campsiteName';
+            input.value = campsiteName;
+
+            form.appendChild(input);
+            document.body.appendChild(form);
+            form.submit();
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Gallery</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.css">
+    <link rel="stylesheet" href="css/galleryStyles.css">
+</head>
+
+<body>
+    <nav>
+        <div class="menu">
+            <div class="menu_links">
+                <a href="/campsite" class="link"><i class="fa-solid fa-arrow-left"></i></a>
+                <a href="/" class="link">Home</a>
+            </div>
+            <div class="menu_links">
+                <% campsite.forEach(campsite => { %>
+                    <a href="/detail" class="link"><i class="fa-solid fa-info"></i> Info</a>
+                    <a href="" class="link"><i class="fa-solid fa-images"></i> Gallery</a>
+                    <a href="/tag&backpack" class="link"><i class="fa-solid fa-person-walking-luggage"></i> Tag & Backpack</a>
+                <% }); %>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+            <% campsite.forEach(campsite => { %>
+                <button type="button" class="custom-btn upload-btn" onclick="openFileInput('<%= campsite.name %>')">
+                    <i class="fa-solid fa-cloud-arrow-up"></i> 
+                    Upload Image
+                </button>
+                <form id="imageForm" enctype="multipart/form-data" style="display: none;">
+                    <input type="file" id="fileInput" name="image" accept="image/png" onchange="uploadImage('<%= campsite.name %>')">
+                </form>
+
+                <!-- ปุ่ม Delete Image ที่สามารถลากได้ -->
+                <button type="button" class="custom-btn delete-btn" draggable="true" ondragstart="handleDragStart(event)">
+                    <i class="fa-solid fa-eraser"></i> Delete Image
+                </button>
+
+                <div class="row">
+                    <% campsite.campimage.forEach(campimage => { %>
+                        <a href="<%= campimage %>" data-toggle="lightbox" data-gallery="gallery" class="col-md-4">
+                            <img src="<%= campimage %>" class="img-fluid rounded" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)" ondrop="handleDrop(event, '<%= campimage %>')">
+                        </a>
+                    <% }); %>
+                </div>
+            <% }); %>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.min.js"></script>
+    <script src="js/galleryScript.js"></script>
+    <script>
+        function openFileInput(campsiteName) {
+            console.log(campsiteName);
+            document.getElementById('fileInput').click();
+        }
+
+        async function uploadImage(campsiteName) {
+            console.log(campsiteName);
+            const fileInput = document.getElementById('fileInput');
+            const file = fileInput.files[0];
+
+            if (!file) return;
+
+            const formData = new FormData();
+            formData.append('image', file);
+            formData.append('campsiteName', campsiteName);
+
+            try {
+                const response = await fetch(`/updategallery/${campsiteName}`, {
+                    method: 'POST',
+                    body: formData,
+                });
+
+                if (response.ok) {
+                    alert('Image updated successfully.');
+                    location.reload();
+                } else {
+                    alert('Failed to update image.');
+                }
+            } catch (error) {
+                console.error('Error uploading image:', error);
+                alert('Error uploading image.');
+            }
+        }
+
+        // Drag and Drop logic for Delete Image button
+        function handleDragStart(event) {
+            event.dataTransfer.setData('text/plain', 'delete-image');
+        }
+
+        function handleDragOver(event) {
+            event.preventDefault();
+            event.currentTarget.classList.add('drag-over');
+        }
+
+        function handleDragLeave(event) {
+            event.currentTarget.classList.remove('drag-over');
+        }
+
+        async function handleDrop(event, campimage) {
+            event.preventDefault();
+            event.currentTarget.classList.remove('drag-over');
+
+            const dragData = event.dataTransfer.getData('text/plain');
+            if (dragData === 'delete-image') {
+                // ส่ง path ของรูปภาพไปยัง route /deleteimage
+                try {
+                    const response = await fetch('/deleteimage', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ campimage: campimage })
+                    });
+
+                    if (response.ok) {
+                        alert('Image deleted successfully.');
+                        location.reload();
+                    } else {
+                        alert('Failed to delete image.');
+                    }
+                } catch (error) {
+                    console.error('Error deleting image:', error);
+                    alert('Error deleting image.');
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>

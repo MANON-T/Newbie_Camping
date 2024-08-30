@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medal Manage</title>
+    <link rel="stylesheet" href="css/medal_manageStyles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <nav>
+        <div class="menu">
+            <div class="menu_links">
+                <a href="/" class="link">Home</a>
+            </div>
+            <!-- <p class="website_name">Newbie Camping</p> -->
+            <div class="menu_links">
+                <a href="/campsite" class="link"><i class="fa-solid fa-location-dot"></i> Location</a>
+                <a href="/article" class="link"><i class="fa-solid fa-pen"></i> tip</a>
+                <a href="/medal_manage" class="link"><i class="fa-solid fa-list-check"></i> Manage stamps</a>
+            </div>
+            <div class="menu_icon">
+                <span class="icon"></span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="wrapper">
+        <div class="content">
+            <% medal.forEach(medal=> { %>
+                <div class="card" onclick="goToDetail('<%= medal.name %>')">
+                    <figure class="card__imageBg">
+                        <img src="<%= medal.unlock %>" alt="<%= medal.name %>">
+                    </figure>
+                    <article class="card__text">
+                        <h2 class="card__title">
+                            <%= medal.name %>
+                        </h2>
+                    </article>
+                </div>
+            <% }); %>
+        </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="js/medal_manageScript.js"></script>
+    <script>
+        function goToDetail(name) {
+            const form = document.createElement('form');
+            form.method = 'POST';
+            form.action = '/editMedal';
+
+            const input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = 'name';
+            input.value = name;
+
+            form.appendChild(input);
+            document.body.appendChild(form);
+            form.submit();
+        }
+    </script>
+</body>
+
+</html>

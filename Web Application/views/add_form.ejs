@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Location Form</title>
+    <link rel="stylesheet" href="css/add_formStyles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <nav>
+        <div class="menu">
+            <div class="menu_links">
+                <a href="/campsite" class="link"><i class="fa-solid fa-arrow-left"></i></a>
+                <a href="/" class="link">Home</a>
+            </div>
+            <div class="menu_links">
+                <a href="" class="link"><i class="fa-solid fa-circle-plus"></i> Add a location</a>
+                <a href="/add_article" class="link"><i class="fa-solid fa-circle-plus"></i> Write a tip</a>
+                <a href="/medal_manage" class="link"><i class="fa-solid fa-list-check"></i> Manage stamps</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="progress-indicator">
+            <div id="progress-bar"></div>
+            <span id="step-indicator">Step 1 of 3</span>
+        </div>
+
+        <div class="form-card">
+            <form action="/addCampsite" method="post" id="dynamicForm" enctype="multipart/form-data">
+                <!-- Step 1: General Information -->
+                <div class="form-step" id="step-1">
+                    <div class="title">
+                        <div id="preview-container">
+                            <img id="image-preview" src="" alt="Image Preview"
+                                style="display: none; width: 50%; height: auto; margin-bottom: 10px; margin: auto;" />
+                        </div>
+                        <br>
+                        <button type="button" class="custom-btn" id="upload-button"
+                            onclick="document.getElementById('file-input').click();">
+                            <i class="fa-solid fa-book"></i>
+                            Choose cover photo
+                        </button>
+                        <input type="file" id="file-input" name="image" accept="image/*" style="display: none;"
+                            onchange="previewImage(event)">
+                        <br><br>
+                        <label for="">Campsite Score:</label>
+                        <input type="number" name="score" id="" min="0" max="100">
+                        <br>
+                        <label for="">Campsite Name:</label>
+                        <input type="text" name="name" id="">
+                    </div>
+                </div>
+
+                <!-- Step 2: Fees -->
+                <div class="form-step" id="step-2" style="display: none;">
+                    <div class="form-grid">
+                        <div class="card">
+                            <div class="icon-container">
+                                <i class="fa-solid fa-user"></i>
+                            </div>
+                            <br>
+                            <label for="adult-fee">Adult Entry Fee:</label>
+                            <input type="number" name="adult_fee" id="adult-fee" min="0">
+                        </div>
+                        <div class="card">
+                            <div class="icon-container">
+                                <i class="fa-solid fa-child"></i>
+                            </div>
+                            <br>
+                            <label for="child-fee">Child Entry Fee:</label>
+                            <input type="number" name="child_fee" id="child-fee" min="0">
+                        </div>
+                        <div class="card">
+                            <div class="icon-container">
+                                <i class="fa-solid fa-square-parking"></i>
+                            </div>
+                            <br>
+                            <label for="parking-fee">Parking Fee:</label>
+                            <input type="number" name="parking_fee" id="parking-fee" min="0">
+                        </div>
+                        <div class="card">
+                            <div class="icon-container">
+                                <i class="fa-solid fa-fire"></i>
+                            </div>
+                            <br>
+                            <label for="camping-fee">Camping Fee:</label>
+                            <input type="number" name="camping_fee" id="camping-fee" min="0">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 3: Additional Services -->
+                <div class="form-step" id="step-3" style="display: none;">
+                    <div class="service">
+                        <div class="toggle-wrapper">
+                            <label for="accommodation-toggle">Accommodation Available:</label>
+                            <div class="toggle-container">
+                                <input type="checkbox" name="accommodation-toggle" id="accommodation-toggle"
+                                    onchange="toggleInputs('accommodation')">
+                                <span class="slider"></span>
+                            </div>
+                        </div>
+                        <div id="accommodation-sizes" class="size-inputs">
+                            <label for="small-size">Small Size</label>
+                            <input type="number" name="small-size" id="small-size" min="0">
+                            <label for="medium-size">Medium Size</label>
+                            <input type="number" name="medium-size" id="medium-size" min="0">
+                            <label for="large-size">Large Size</label>
+                            <input type="number" name="large-size" id="large-size" min="0">
+                        </div>
+                        <div class="toggle-wrapper">
+                            <label for="tent-toggle">Tent Service:</label>
+                            <div class="toggle-container">
+                                <input type="checkbox" id="tent-toggle" name="tent-toggle" onchange="toggleInputs('tent')">
+                                <span class="slider"></span>
+                            </div>
+                        </div>
+                        <div id="tent-sizes" class="size-inputs">
+                            <label for="tent-small-size">Small Size</label>
+                            <input type="number" name="tent-small-size" id="tent-small-size" min="0">
+                            <label for="tent-medium-size">Medium Size</label>
+                            <input type="number" name="tent-medium-size" id="tent-medium-size" min="0">
+                            <label for="tent-large-size">Large Size</label>
+                            <input type="number" name="tent-large-size" id="tent-large-size" min="0">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 4: Additional Services -->
+                <div class="form-step" id="step-4" style="display: none;">
+                    <br>
+                    <h1>Activity</h1>
+                    <div id="formContainer">
+                        <button id="addInputBtn" type="button">+</button>
+                    </div>
+                </div>
+
+                <!-- Step 5: Additional Services -->
+                <div class="form-step" id="step-5" style="display: none;">
+                    <br>
+                    <h1>Warning</h1>
+                    <div id="formContainer1">
+                        <button id="addInputBtn1" type="button">+</button>
+                    </div>
+                </div>
+
+                <!-- Step 6: Additional Services -->
+                <div class="form-step" id="step-6" style="display: none;">
+                    <br>
+                    <div class="power">
+                        <label for="power-toggle" class="toggle-label">Power Access:</label>
+                        <div class="toggle-container">
+                            <input type="checkbox" id="power-toggle" onchange="updatePowerValue()">
+                            <span class="slider"></span>
+                        </div>
+                    </div>
+                    <input type="hidden" id="power-value" name="power" value="false">
+                    <div class="resroom">
+                        <br>
+                        <label for="clean-restrooms-toggle" class="toggle-label">Clean Restrooms:</label>
+                        <div class="toggle-container">
+                            <input type="checkbox" id="clean-restrooms-toggle" onchange="updateCleanRestroomsValue()">
+                            <span class="slider"></span>
+                        </div>
+                    </div>
+                    <input type="hidden" id="clean-restrooms-value" name="clean_restrooms" value="false">
+                    <div class="resroom">
+                        <br>
+                        <label for="gender-separated-restrooms-toggle" class="toggle-label">Gender Separated
+                            Restrooms:</label>
+                        <div class="toggle-container">
+                            <input type="checkbox" id="gender-separated-restrooms-toggle"
+                                onchange="updateGenderSeparatedRestroomsValue()">
+                            <span class="slider"></span>
+                        </div>
+                    </div>
+                    <input type="hidden" id="gender-separated-restrooms-value" name="gender_separated_restrooms"
+                        value="false">
+                </div>
+
+                <!-- Step 7: Additional Services -->
+                <div class="form-step" id="step-7" style="display: none;">
+                    <div class="signal-container">
+                        <!-- สำหรับ TRUE -->
+                        <div class="signal-group">
+                            <label for="TRUE">TRUE</label>
+                            <select name="TRUE" id="TRUE">
+                                <option value="🟢">🟢</option>
+                                <option value="🟠">🟠</option>
+                                <option value="🔴">🔴</option>
+                            </select>
+                        </div>
+
+                        <!-- สำหรับ DTAC -->
+                        <div class="signal-group">
+                            <label for="DTAC">DTAC</label>
+                            <select name="DTAC" id="DTAC">
+                                <option value="🟢">🟢</option>
+                                <option value="🟠">🟠</option>
+                                <option value="🔴">🔴</option>
+                            </select>
+                        </div>
+
+                        <!-- สำหรับ AIS -->
+                        <div class="signal-group">
+                            <label for="AIS">AIS</label>
+                            <select name="AIS" id="AIS">
+                                <option value="🟢">🟢</option>
+                                <option value="🟠">🟠</option>
+                                <option value="🔴">🔴</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div>
+                        <br>
+                        <label for="">Lat:</label>
+                        <input type="text" name="lat" id=""">
+                        <br>
+                        <label for="">lng:</label>
+                        <input type="text" name="lng" id="">
+                        <br>
+                    </div>
+                </div>
+
+                <!-- Step 8: Additional Services -->
+                <div class="form-step" id="step-8" style="display: none;">
+                    <div id="preview-container1">
+                        <img id="image-preview1" src="" alt="Image Preview"
+                            style="display: none; width: 50%; height: auto; margin-bottom: 10px; margin: auto;" />
+                    </div>
+                    <br>
+                    <button type="button" class="custom-btn" id="upload-button"
+                        onclick="document.getElementById('file-input1').click();">
+                        <i class="fa-solid fa-book"></i>
+                        Choose Lock Medal photo
+                    </button>
+                    <input type="file" id="file-input1" name="image" accept="image/*" style="display: none;"
+                        onchange="previewImage1(event)">
+                    <br><br>
+                </div>
+                
+                <!-- Step 9: Additional Services -->
+                <div class="form-step" id="step-9" style="display: none;">
+                    <div id="preview-container2">
+                        <img id="image-preview2" src="" alt="Image Preview"
+                            style="display: none; width: 50%; height: auto; margin-bottom: 10px; margin: auto;" />
+                    </div>
+                    <br>
+                    <button type="button" class="custom-btn" id="upload-button"
+                        onclick="document.getElementById('file-input2').click();">
+                        <i class="fa-solid fa-book"></i>
+                        Choose Unlock Medal photo
+                    </button>
+                    <input type="file" id="file-input2" name="image" accept="image/*" style="display: none;"
+                        onchange="previewImage2(event)">
+                    <br><br>
+                </div>
+
+                <!-- Navigation Buttons -->
+                <div class="form-navigation">
+                    <button type="button" id="back-button" style="display: none;" onclick="prevStep()">Back</button>
+                    <button type="button" id="next-button" onclick="nextStep()">Next</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/add_formScript.js"></script>
+</body>
+
+</html>

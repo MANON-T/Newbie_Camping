@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <% campsite.forEach(campsite=> { %>
+        <title><%= campsite.name %></title>
+    <% }); %>
+    <link rel="stylesheet" href="css/detailStyles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <% campsite.forEach(campsite => { %>
+        <div id="rightPanel">
+            <h3>⛔Don,t do this</h3>
+            <br>
+            <% campsite.warning.forEach(warning => { %>
+                <li><%= warning %></li>
+            <% }); %>
+            <br>
+            <button type="button" class="custom-btn" id="edit-btn-warning">Edit</button>
+        </div>
+        <!-- ปุ่มสำหรับเปิด-ปิดแถบ -->
+        <button id="toggleButton"><</button>
+        
+        <div class="popup-overlay" id="popup-overlay4">
+            <div class="popup-content">
+                <h2>Edit Warning In Camp</h2>
+                <br>
+                <form action="/updateWarning/<%= campsite.name %>" method="post" id="warning-form">
+                    <!-- กำหนดให้มีรายการกิจกรรมที่เป็น Form แต่ละอัน -->
+                    <div id="warning-list">
+                        <% campsite.warning.forEach((warning, index) => { %>
+                        <div class="warning-item">
+                            <input type="text" name="warning[]" value="<%= warning %>" />
+                            <button type="button" class="delete-btn" onclick="removeActivity(this)"><i class="fa-solid fa-trash-can"></i></button>
+                        </div>
+                        <% }); %>
+                    </div>
+                    <!-- ปุ่มเพิ่ม Form ใหม่ -->
+                    <button type="button" id="add-warning-btn">+</button>
+                    <br>
+                    <!-- ปุ่มบันทึกและรีเซ็ต -->
+                    <button class="save-btn" type="submit">Save</button>
+                    <button class="reset-btn" type="reset">Reset</button>
+                </form>
+                <button class="close-btn" id="close-btn4">Close</button>
+            </div>
+        </div>
+    <% }); %>
+
+    <nav>
+        <div class="menu">
+            <div class="menu_links">
+                <a href="/campsite" class="link"><i class="fa-solid fa-arrow-left"></i></a>
+                <a href="/" class="link">Home</a>
+            </div>
+            <div class="menu_links">
+                <a href="" class="link"><i class="fa-solid fa-info"></i> Info</a>
+                <a href="/gallery" class="link"><i class="fa-solid fa-images"></i> Gallery</a>
+                <a href="/tag&backpack" class="link"><i class="fa-solid fa-person-walking-luggage"></i> Tag & Backpack</a>
+            </div>
+            <div class="menu_icon">
+                <span class="icon"></span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="main-card">
+            <% if (campsite.length > 0) { %>
+            <% campsite.forEach(campsite => { %>
+            <div class="campsite-card">
+                <!-- สัญลักษณ์แก้ไขด้านซ้ายบน -->
+                <div class="top-left">
+                    <i class="fa-solid fa-edit edit-icon" onclick="openFileInput('<%= campsite.name %>')"></i>
+                </div>
+                <div class="top-right">
+                    <i class="fa-solid fa-star"></i>
+                    <span><%= campsite.camp_score %></span>
+                </div>
+                <img src="<%= campsite.imageURL %>" alt="<%= campsite.name %>">
+                <h2><%= campsite.name %></h2>
+                <button type="button" class="custom-btn" id="edit-btn-ns">Edit</button>
+            </div>
+
+            <div class="popup-overlay" id="popup-overlay5">
+                <div class="popup-content">
+                    <h2>Edit Name & Score</h2>
+                    <br>
+                    <form action="/updatens/<%= campsite.name %>" method="post" id="ns-form">
+                        <label for="">Name:</label>
+                        <input type="text" name="name" id="" value="<%= campsite.name %>">
+                        <br>
+                        <label for="">Score: </label>
+                        <input type="number" name="score" id="" value="<%= campsite.camp_score %>" max="100" min="0">
+                        <br>
+                        <!-- ปุ่มบันทึกและรีเซ็ต -->
+                        <button class="save-btn" type="submit" onclick="return confirm('After save we will return to campsite page for set new information.')">Save</button>
+                        <button class="reset-btn" type="reset">Reset</button>
+                    </form>
+                    <button class="close-btn" id="close-btn5">Close</button>
+                </div>
+            </div>
+
+            <!-- ฟอร์มที่ซ่อนไว้ -->
+            <form id="imageForm" enctype="multipart/form-data" style="display: none;">
+                <input type="file" id="fileInput" name="image" accept="image/*" onchange="uploadImage('<%= campsite.name %>')">
+            </form>
+            <% }); %>
+            <% } else { %>
+            <p>No details found for the selected campsite.</p>
+            <% } %>
+        </div>
+
+        <% campsite.forEach(campsite => { %>
+        <div class="small-cards">
+            <div class="small-card-fee-up">
+                <div class="icon-container">
+                    <i class="fa-solid fa-user"></i>
+                </div>
+                <h4>Adult Entry Fee</h4>
+                <p>฿ <%= campsite.adult_entry_fee ?? 0 %></p>
+                <br>
+                <form action="" method="post">
+                    <button type="button" class="custom-btn" id="edit-btn-adult">Edit</button>
+                </form>
+            </div>
+            <div class="small-card-fee-up">
+                <div class="icon-container">
+                    <i class="fa-solid fa-child"></i>
+                </div>
+                <h4>Child Entry Fee</h4>
+                <p>฿ <%= campsite.child_entry_fee ?? 0 %></p>
+                <br>
+                <form action="" method="post">
+                    <button type="button" class="custom-btn" id="edit-btn-child">Edit</button>
+                </form>
+            </div>
+        </div>
+
+        <div class="small-cards">
+            <div class="small-card-fee-up">
+                <div class="icon-container">
+                    <i class="fa-solid fa-square-parking"></i>
+                </div>
+                <h4>Parking Fee</h4>
+                <p>฿ <%= campsite.parking_fee ?? 0 %></p>
+                <br>
+                <form action="" method="post">
+                    <button type="button" class="custom-btn" id="edit-btn-parking">Edit</button>
+                </form>
+            </div>
+            <div class="small-card-fee-up">
+                <div class="icon-container">
+                    <i class="fa-solid fa-fire"></i>
+                </div>
+                <h4>Camping Fee</h4>
+                <p>฿ <%= campsite.camping_fee %></p>
+                <br>
+                <form action="" method="post">
+                    <button type="button" class="custom-btn" id="edit-btn-camping">Edit</button>
+                </form>
+            </div>
+        </div>
+        <% }); %>
+
+        <% campsite.forEach(campsite => { %>
+            <div class="popup-overlay" id="popup-overlay">
+                <div class="popup-content">
+                    <h2>Edit Entry Fee Information</h2>
+                    <br>
+                    <form action="/updateEntryfee/<%= campsite.name %>" method="post">
+                        <label for="">Adult Entry Fee</label>
+                        <input type="text" name="adult_entry_fee" id="adult_entry_fee" value="<%= campsite.adult_entry_fee %>">฿
+                        <br>
+                        <label for="">Child Entry Fee</label>
+                        <input type="text" name="child_entry_fee" id="" value="<%= campsite.child_entry_fee %>">฿
+                        <br>
+                        <label for="">Parking Fee</label>
+                        <input type="text" name="parking_fee" id="" value="<%= campsite.parking_fee %>">฿
+                        <br>
+                        <label for="">Camping Fee</label>
+                        <input type="text" name="camping_fee" id="" value="<%= campsite.camping_fee %>">฿
+                        <br>
+                        <button class="save-btn" type="submit">Save</button>
+                        <button class="reset-btn" type="reset">Reset</button>
+                    </form>
+                    <button class="close-btn" id="close-btn">Close</button>
+                </div>
+            </div>
+        <% }); %>
+
+        <% campsite.forEach(campsite => { %>
+        <div class="small-cards-fee">
+            <div class="small-card-service">
+                <div class="icon-text-container">
+                    <div class="icon-container">
+                        <i class="fa-solid fa-house"></i>
+                    </div>
+                    <h4>Accommodation Available</h4>
+                    <p>
+                        <% if (campsite.accommodation_available) { %>
+                            <div class="icon-container-check" onclick="togglePopup()">
+                                <i class="fa-regular fa-circle-check"></i>
+                            </div>
+                        <% } else { %>
+                            <div class="icon-container-cancle" onclick="togglePopup()">
+                                <i class="fa-solid fa-ban"></i>
+                            </div>
+                        <% } %>
+                    </p>
+                    <form action="">
+                        <label for="">Small Size</label>
+                        <input type="text" name="small-house" placeholder=" ฿ <%= campsite.House[0] %>" readonly>
+                        <label for="">Medium Size</label>
+                        <input type="text" name="medium-house" placeholder=" ฿ <%= campsite.House[1] %>" readonly>
+                        <label for="">Large Size</label>
+                        <input type="text" name="large-house" placeholder=" ฿ <%= campsite.House[2] %>" readonly>
+                    </form>
+                </div>
+                <!-- Popup -->
+                <div id="popup" class="popup-container">
+                    <div class="popup-content">
+                        <span class="close" onclick="togglePopup()">&times;</span>
+                        <div class="toggle-container">
+                            <label class="switch">
+                                <input type="checkbox" id="toggleSwitch" onchange="toggleForm()" <%= campsite.accommodation_available ? 'checked' : '' %>>
+                                <span class="slider round"></span>
+                            </label>
+                            <span id="toggleStatus"><%= campsite.accommodation_available ? 'On' : 'Off' %></span>
+                        </div>
+                        <div id="sizeForm" class="form-group" style="display: <%= campsite.accommodation_available ? 'block' : 'none' %>;">
+                            <form id="accommodationForm">
+                                <div class="form-row">
+                                    <br>
+                                    <label for="smallSize">Small Size</label>
+                                    <input type="number" id="smallSize" name="smallSize" value="<%= campsite.House[0] %>">
+                                </div>
+                                <div class="form-row">
+                                    <label for="mediumSize">Medium Size</label>
+                                    <input type="number" id="mediumSize" name="mediumSize" value="<%= campsite.House[1] %>">
+                                </div>
+                                <div class="form-row">
+                                    <label for="largeSize">Large Size</label>
+                                    <input type="number" id="largeSize" name="largeSize" value="<%= campsite.House[2] %>">
+                                </div>
+                            </form>
+                        </div>
+                        <button onclick="updateAccommodation()" class="update-btn">Update</button>
+                    </div>
+                </div>
+
+                <div class="icon-text-container">
+                    <div class="icon-container">
+                        <i class="fa-solid fa-tents"></i>
+                    </div>
+                    <h4>Tent Service</h4>
+                    <p>
+                        <% if (campsite.tent_service) { %>
+                        <div class="icon-container-check" onclick="togglePopup1()">
+                            <i class="fa-regular fa-circle-check"></i>
+                        </div>
+                        <% } else { %>
+                        <div class="icon-container-cancle" onclick="togglePopup1()">
+                            <i class="fa-solid fa-ban"></i>
+                        </div>
+                        <% } %>
+                    </p>
+                    <form action="">
+                        <label for="">Small Size</label>
+                        <input type="text" name="small-tent" placeholder=" ฿ <%= campsite.Tent_rental[0] %>" readonly>
+                        <label for="">Medium Size</label>
+                        <input type="text" name="medium-tent" placeholder=" ฿ <%= campsite.Tent_rental[1] %>" readonly>
+                        <label for="">Large Size</label>
+                        <input type="text" name="large-tent" placeholder=" ฿ <%= campsite.Tent_rental[2] %>" readonly>
+                    </form>
+                </div>
+                <!-- Popup -->
+                <div id="popup1" class="popup-container">
+                    <div class="popup-content">
+                        <span class="close" onclick="togglePopup1()">&times;</span>
+                        <div class="toggle-container">
+                            <label class="switch">
+                                <input type="checkbox" id="toggleSwitch1" onchange="toggleForm1()" <%= campsite.tent_service ? 'checked' : '' %>>
+                                <span class="slider round"></span>
+                            </label>
+                            <span id="toggleStatus1"><%= campsite.tent_service ? 'On' : 'Off' %></span>
+                        </div>
+                        <div id="sizeForm1" class="form-group" style="display: <%= campsite.tent_service ? 'block' : 'none' %>;">
+                            <form id="accommodationForm1">
+                                <div class="form-row">
+                                    <br>
+                                    <label for="smallSize1">Small Size</label>
+                                    <input type="number" id="smallSize1" name="smallSize1" value="<%= campsite.Tent_rental[0] %>">
+                                </div>
+                                <div class="form-row">
+                                    <label for="mediumSize1">Medium Size</label>
+                                    <input type="number" id="mediumSize1" name="mediumSize1" value="<%= campsite.Tent_rental[1] %>">
+                                </div>
+                                <div class="form-row">
+                                    <label for="largeSize1">Large Size</label>
+                                    <input type="number" id="largeSize1" name="largeSize1" value="<%= campsite.Tent_rental[2] %>">
+                                </div>
+                            </form>
+                        </div>
+                        <button onclick="updateTent()" class="update-btn">Update</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="small-card-fee-up">
+                <div class="icon-text-container">
+                    <div class="icon-container">
+                        <i class="fa-solid fa-car-battery"></i>
+                    </div>
+                    <h4>Power Access</h4>
+                    <p>
+                        <% if (campsite.power_access) { %>
+                        <div class="icon-container-check" onclick="togglePopup2()">
+                            <i class="fa-regular fa-circle-check"></i>
+                        </div>
+                        <% } else { %>
+                        <div class="icon-container-cancle" onclick="togglePopup2()">
+                            <i class="fa-solid fa-ban"></i>
+                        </div>
+                        <% } %>
+                    </p>
+                </div>
+                <!-- Popup -->
+                <div id="popup2" class="popup-container">
+                    <div class="popup-content">
+                        <span class="close" onclick="togglePopup2()">&times;</span>
+                        <div class="toggle-container">
+                            <label class="switch">
+                                <input type="checkbox" id="toggleSwitch2" onchange="toggleForm2()" <%= campsite.power_access ? 'checked' : '' %>>
+                                <span class="slider round"></span>
+                            </label>
+                            <span id="toggleStatus2"><%= campsite.power_access ? 'On' : 'Off' %></span>
+                        </div>
+                        <button onclick="updatePowerAccess()" class="update-btn">Update</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <% }); %>
+
+        <% campsite.forEach(campsite => { %>
+        <div class="small-cards-fee">
+            <div class="small-card-fee-down">
+                <div class="icon-container">
+                    <i class="fa-solid fa-chart-line"></i>
+                </div>
+                <h4>Activity</h4>
+                <ul>
+                    <% campsite.activities.slice(0, 3).forEach(activity => { %>
+                    <li><%= activity %></li>
+                    <% }); %>
+                </ul>
+                <br>
+                <form action="" method="post">
+                    <button type="button" class="custom-btn" id="edit-btn-activity">Edit</button>
+                </form>
+                <% if (campsite.activities.length > 3) { %>
+                <div class="expand-icon" onclick="showPopup(<%= JSON.stringify(campsite.activities) %>)">
+                    <i class="fa-solid fa-expand"></i>
+                </div>
+                <% } %>
+            </div>
+            <div class="popup-overlay" id="popup-overlay1">
+                <div class="popup-content">
+                    <h2>Edit Activity In Camp</h2>
+                    <br>
+                    <form action="/updateActivity/<%= campsite.name %>" method="post" id="activity-form">
+                        <!-- กำหนดให้มีรายการกิจกรรมที่เป็น Form แต่ละอัน -->
+                        <div id="activity-list">
+                            <% campsite.activities.forEach((activity, index) => { %>
+                            <div class="activity-item">
+                                <input type="text" name="activities[]" value="<%= activity %>" />
+                                <button type="button" class="delete-btn" onclick="removeActivity(this)"><i class="fa-solid fa-trash-can"></i></button>
+                            </div>
+                            <% }); %>
+                        </div>
+                        <!-- ปุ่มเพิ่ม Form ใหม่ -->
+                        <button type="button" id="add-activity-btn">+</button>
+                        <br>
+                        <!-- ปุ่มบันทึกและรีเซ็ต -->
+                        <button class="save-btn" type="submit">Save</button>
+                        <button class="reset-btn" type="reset">Reset</button>
+                    </form>
+                    <button class="close-btn" id="close-btn1">Close</button>
+                </div>
+            </div>
+
+            <div id="activity-popup" class="popup">
+                <div class="popup-content">
+                    <span class="close" onclick="closePopup()">&times;</span>
+                    <ul id="popup-activities"></ul>
+                </div>
+            </div>
+
+            <div class="small-card-fee-down">
+                <div class="icon-container">
+                    <i class="fa-solid fa-toilet"></i>
+                </div>
+                <h4>Clean Restrooms</h4>
+                <p>
+                    <% if (campsite.clean_restrooms) { %>
+                    <div class="icon-container-check" onclick="togglePopup3()">
+                        <i class="fa-regular fa-circle-check"></i>
+                    </div>
+                    <% } else { %>
+                    <div class="icon-container-cancle" onclick="togglePopup3()">
+                        <i class="fa-solid fa-ban"></i>
+                    </div>
+                    <% } %>
+                </p>
+            </div>
+            <!-- Popup -->
+            <div id="popup3" class="popup-container">
+                <div class="popup-content">
+                    <span class="close" onclick="togglePopup3()">&times;</span>
+                    <div class="toggle-container">
+                        <label class="switch">
+                            <input type="checkbox" id="toggleSwitch3" onchange="toggleForm3()" <%= campsite.clean_restrooms ? 'checked' : '' %>>
+                            <span class="slider round"></span>
+                        </label>
+                        <span id="toggleStatus3"><%= campsite.clean_restrooms ? 'On' : 'Off' %></span>
+                    </div>
+                    <button onclick="updateCleanRestrooms()" class="update-btn">Update</button>
+                </div>
+            </div>
+
+            <div class="small-card-fee-down">
+                <div class="icon-container">
+                    <i class="fa-solid fa-restroom"></i>
+                </div>
+                <h4>Gender Separated Restrooms</h4>
+                <p>
+                    <% if (campsite.gender_separated_restrooms) { %>
+                    <div class="icon-container-check" onclick="togglePopup4()">
+                        <i class="fa-regular fa-circle-check"></i>
+                    </div>
+                    <% } else { %>
+                    <div class="icon-container-cancle" onclick="togglePopup4()">
+                        <i class="fa-solid fa-ban"></i>
+                    </div>
+                    <% } %>
+                </p>
+            </div>
+            <!-- Popup -->
+            <div id="popup4" class="popup-container">
+                <div class="popup-content">
+                    <span class="close" onclick="togglePopup4()">&times;</span>
+                    <div class="toggle-container">
+                        <label class="switch">
+                            <input type="checkbox" id="toggleSwitch4" onchange="toggleForm4()" <%= campsite.gender_separated_restrooms ? 'checked' : '' %>>
+                            <span class="slider round"></span>
+                        </label>
+                        <span id="toggleStatus4"><%= campsite.gender_separated_restrooms ? 'On' : 'Off' %></span>
+                    </div>
+                    <button onclick="updateGenderSeparatedRestrooms()" class="update-btn">Update</button>
+                </div>
+            </div>
+
+            <div class="small-card-fee-down">
+                <div class="icon-container">
+                    <i class="fa-solid fa-signal"></i>
+                </div>
+                <h4>Phone Signal</h4>
+                <ul>
+                    <% campsite.phone_signal.forEach(phone_signal => { %>
+                    <li><%= phone_signal %></li>
+                    <% }); %>
+                </ul>
+                <br>
+                <button type="button" class="custom-btn" id="edit-btn-signal">Edit</button>
+            </div>
+
+            <div class="popup-overlay" id="popup-overlay2">
+                <div class="popup-content">
+                    <h2>Edit Phone Singnal</h2>
+                    <br>
+                    <form action="/updateSignal/<%= campsite.name %>" method="post">
+                        <% const phoneSignal = campsite.phone_signal || []; %>
+                    
+                        <!-- สำหรับ TRUE -->
+                            <select name="TRUE">
+                                <option value="🟢" <%= phoneSignal.includes('🟢TRUE') ? 'selected' : '' %> >🟢</option>
+                                <option value="🟠" <%= phoneSignal.includes('🟠TRUE') ? 'selected' : '' %> >🟠</option>
+                                <option value="🔴" <%= phoneSignal.includes('🔴TRUE') ? 'selected' : '' %> >🔴</option>
+                            </select>
+                            <label for="TRUE">TRUE</label>
+                    
+                        <!-- สำหรับ DTAC -->
+                            <select name="DTAC">
+                                <option value="🟢" <%= phoneSignal.includes('🟢DTAC') ? 'selected' : '' %> >🟢</option>
+                                <option value="🟠" <%= phoneSignal.includes('🟠DTAC') ? 'selected' : '' %> >🟠</option>
+                                <option value="🔴" <%= phoneSignal.includes('🔴DTAC') ? 'selected' : '' %> >🔴</option>
+                            </select>
+                            <label for="DTAC">DTAC</label>
+                    
+                        <!-- สำหรับ AIS -->
+                            <select name="AIS">
+                                <option value="🟢" <%= phoneSignal.includes('🟢AIS') ? 'selected' : '' %> >🟢</option>
+                                <option value="🟠" <%= phoneSignal.includes('🟠AIS') ? 'selected' : '' %> >🟠</option>
+                                <option value="🔴" <%= phoneSignal.includes('🔴AIS') ? 'selected' : '' %> >🔴</option>
+                            </select>
+                            <label for="AIS">AIS</label>
+                            <br>
+                        <!-- ปุ่มบันทึกและรีเซ็ต -->
+                            <button class="save-btn" type="submit">Save</button>
+                            <button class="reset-btn" type="reset">Reset</button>
+                    </form>
+                    <button class="close-btn" id="close-btn2">Close</button>
+                </div>
+            </div>
+        </div>
+
+        <button type="button" class="custom-btn" id="edit-btn-maker">Edit Maker</button>
+        <gmp-map center="<%= campsite.location_coordinates.latitude %>,<%= campsite.location_coordinates.longitude %>"
+            zoom="13" map-id="DEMO_MAP_ID" style="height: 400px">
+            <gmp-advanced-marker
+                position="<%= campsite.location_coordinates.latitude %>,<%= campsite.location_coordinates.longitude %>"
+                title="<%= campsite.name %>"></gmp-advanced-marker>
+        </gmp-map>
+
+        <div class="popup-overlay" id="popup-overlay3">
+            <div class="popup-content">
+                <h2>Edit Location For Map</h2>
+                <br>
+                <form action="/updateMaker/<%= campsite.name %>" method="post">
+                    <label for="">Lat</label>
+                    <input type="text" name="lat" id="" value="<%= campsite.location_coordinates.latitude %>">
+                    <br>
+                    <label for="">lng</label>
+                    <input type="text" name="lng" id="" value="<%= campsite.location_coordinates.longitude %>">
+                    <br>
+                    <!-- ปุ่มบันทึกและรีเซ็ต -->
+                    <button class="save-btn" type="submit">Save</button>
+                    <button class="reset-btn" type="reset">Reset</button>
+                </form>
+                <button class="close-btn" id="close-btn3">Close</button>
+            </div>
+        </div>
+        <% }); %>
+    </div>
+
+    <script src="https://maps.googleapis.com/maps/api/js?key=YOU_GOOGLEMAP_API_KEY&loading=async&libraries=maps,marker&v=beta"
+        defer>
+    </script>
+    <script src="js/detailScript.js"></script>
+    <script>
+        function openFileInput(campsiteName) {
+            console.log(campsiteName);
+            document.getElementById('fileInput').click();
+        }
+      
+        async function uploadImage(campsiteName) {
+            console.log(campsiteName);
+            const fileInput = document.getElementById('fileInput');
+            const file = fileInput.files[0];
+        
+            if (!file) return;
+        
+            const formData = new FormData();
+            formData.append('image', file);
+            formData.append('campsiteName', campsiteName);
+        
+            try {
+                const response = await fetch(`/updateimage/${campsiteName}`, {
+                method: 'POST',
+                body: formData,
+                });
+        
+                if (response.ok) {
+                alert('Image updated successfully.');
+                // คุณสามารถรีเฟรชหน้าเพื่อแสดงรูปใหม่ หรืออัปเดตรูปภาพด้วย JavaScript
+                location.reload();
+                } else {
+                alert('Failed to update image.');
+                }
+            } catch (error) {
+                console.error('Error uploading image:', error);
+                alert('Error uploading image.');
+            }
+        }
+    </script>
+    <script>
+        // จัดการการแสดงผลของ popup
+        const editBtnadult = document.getElementById('edit-btn-adult');
+        const editBtnchild = document.getElementById('edit-btn-child');
+        const editBtnparking = document.getElementById('edit-btn-parking');
+        const editBtncamping = document.getElementById('edit-btn-camping');
+        const editBtnactivity = document.getElementById('edit-btn-activity');
+        const editBtnsignal = document.getElementById('edit-btn-signal');
+        const editBtnmaker = document.getElementById('edit-btn-maker');
+        const editBtnwarning = document.getElementById('edit-btn-warning');
+        const editBtnns = document.getElementById('edit-btn-ns');
+        const popupOverlay = document.getElementById('popup-overlay');
+        const popupOverlay1 = document.getElementById('popup-overlay1');
+        const popupOverlay2 = document.getElementById('popup-overlay2');
+        const popupOverlay3 = document.getElementById('popup-overlay3');
+        const popupOverlay4 = document.getElementById('popup-overlay4');
+        const popupOverlay5 = document.getElementById('popup-overlay5');
+        const closeBtn = document.getElementById('close-btn');
+        const closeBtn1 = document.getElementById('close-btn1');
+        const closeBtn2 = document.getElementById('close-btn2');
+        const closeBtn3 = document.getElementById('close-btn3');
+        const closeBtn4 = document.getElementById('close-btn4');
+        const closeBtn5 = document.getElementById('close-btn5');
+    
+        editBtnadult.addEventListener('click', () => {
+            popupOverlay.style.display = 'flex';
+        });
+        editBtnchild.addEventListener('click', () => {
+            popupOverlay.style.display = 'flex';
+        });
+        editBtnparking.addEventListener('click', () => {
+            popupOverlay.style.display = 'flex';
+        });
+        editBtncamping.addEventListener('click', () => {
+            popupOverlay.style.display = 'flex';
+        });
+        editBtnactivity.addEventListener('click', () => {
+            popupOverlay1.style.display = 'flex';
+        });
+        editBtnsignal.addEventListener('click', () => {
+            popupOverlay2.style.display = 'flex';
+        });
+        editBtnmaker.addEventListener('click', () => {
+            popupOverlay3.style.display = 'flex';
+        });
+        editBtnwarning.addEventListener('click', () => {
+            popupOverlay4.style.display = 'flex';
+        });
+        editBtnns.addEventListener('click', () => {
+            popupOverlay5.style.display = 'flex';
+        });
+    
+        closeBtn.addEventListener('click', () => {
+            popupOverlay.style.display = 'none';
+        });
+        closeBtn1.addEventListener('click', () => {
+            popupOverlay1.style.display = 'none';
+        });
+        closeBtn2.addEventListener('click', () => {
+            popupOverlay2.style.display = 'none';
+        });
+        closeBtn3.addEventListener('click', () => {
+            popupOverlay3.style.display = 'none';
+        });
+        closeBtn4.addEventListener('click', () => {
+            popupOverlay4.style.display = 'none';
+        });
+        closeBtn5.addEventListener('click', () => {
+            popupOverlay5.style.display = 'none';
+        });
+    
+        // ปิด popup เมื่อคลิกนอก popup
+        window.addEventListener('click', (e) => {
+            if (e.target === popupOverlay) {
+                popupOverlay.style.display = 'none';
+            }
+            if (e.target === popupOverlay1) {
+                popupOverlay1.style.display = 'none';
+            }
+            if (e.target === popupOverlay2) {
+                popupOverlay2.style.display = 'none';
+            }
+            if (e.target === popupOverlay3) {
+                popupOverlay3.style.display = 'none';
+            }
+            if (e.target === popupOverlay4) {
+                popupOverlay4.style.display = 'none';
+            }
+            if (e.target === popupOverlay5) {
+                popupOverlay5.style.display = 'none';
+            }
+        });
+    </script>
+    <script>
+        function togglePopup() {
+            const popup = document.getElementById("popup");
+            popup.style.display = popup.style.display === "flex" ? "none" : "flex";
+        }
+
+        function toggleForm() {
+            const toggleSwitch = document.getElementById("toggleSwitch");
+            const form = document.getElementById("sizeForm");
+            const toggleStatus = document.getElementById("toggleStatus");
+
+            if (toggleSwitch.checked) {
+                form.style.display = "block";
+                toggleStatus.textContent = "On";
+            } else {
+                form.style.display = "none";
+                toggleStatus.textContent = "Off";
+                // Set values to 0 when toggled off
+                document.getElementById("smallSize").value = 0;
+                document.getElementById("mediumSize").value = 0;
+                document.getElementById("largeSize").value = 0;
+            }
+        }
+
+        function updateAccommodation() {
+            const toggleValue = document.getElementById("toggleSwitch").checked;
+            const smallSize = document.getElementById("smallSize").value || 0;
+            const mediumSize = document.getElementById("mediumSize").value || 0;
+            const largeSize = document.getElementById("largeSize").value || 0;
+
+            const data = {
+                toggleValue: toggleValue,
+                smallSize: smallSize,
+                mediumSize: mediumSize,
+                largeSize: largeSize,
+            };
+
+            fetch('/updateAccommodation', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+                togglePopup();
+                window.location.reload();
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+        }
+    </script>
+    <script>
+        function togglePopup1() {
+            const popup = document.getElementById("popup1");
+            popup.style.display = popup.style.display === "flex" ? "none" : "flex";
+        }
+
+        function toggleForm1() {
+            const toggleSwitch = document.getElementById("toggleSwitch1");
+            const form = document.getElementById("sizeForm1");
+            const toggleStatus = document.getElementById("toggleStatus1");
+
+            if (toggleSwitch.checked) {
+                form.style.display = "block";
+                toggleStatus.textContent = "On";
+            } else {
+                form.style.display = "none";
+                toggleStatus.textContent = "Off";
+                // Set values to 0 when toggled off
+                document.getElementById("smallSize1").value = 0;
+                document.getElementById("mediumSize1").value = 0;
+                document.getElementById("largeSize1").value = 0;
+            }
+        }
+
+        function updateTent() {
+            const toggleValue = document.getElementById("toggleSwitch1").checked;
+            const smallSize = document.getElementById("smallSize1").value || 0;
+            const mediumSize = document.getElementById("mediumSize1").value || 0;
+            const largeSize = document.getElementById("largeSize1").value || 0;
+
+            const data = {
+                toggleValue: toggleValue,
+                smallSize: smallSize,
+                mediumSize: mediumSize,
+                largeSize: largeSize,
+            };
+
+            fetch('/updateTent', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+                togglePopup1();
+                window.location.reload();
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+        }
+    </script>
+    <script>
+        function togglePopup2() {
+            const popup = document.getElementById("popup2");
+            popup.style.display = popup.style.display === "flex" ? "none" : "flex";
+        }
+
+        function toggleForm2() {
+            const toggleSwitch = document.getElementById("toggleSwitch2");
+            const toggleStatus = document.getElementById("toggleStatus2");
+
+            if (toggleSwitch.checked) {
+                toggleStatus.textContent = "On";
+            } else {
+                toggleStatus.textContent = "Off";
+            }
+        }
+
+        function updatePowerAccess() {
+            const toggleValue = document.getElementById("toggleSwitch2").checked;
+
+            const data = {
+                toggleValue: toggleValue,
+            };
+
+            fetch('/updatePowerAccess', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+                togglePopup2();
+                window.location.reload();
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+        }
+    </script>
+    <script>
+        function togglePopup3() {
+            const popup = document.getElementById("popup3");
+            popup.style.display = popup.style.display === "flex" ? "none" : "flex";
+        }
+
+        function toggleForm3() {
+            const toggleSwitch = document.getElementById("toggleSwitch3");
+            const toggleStatus = document.getElementById("toggleStatus3");
+
+            if (toggleSwitch.checked) {
+                toggleStatus.textContent = "On";
+            } else {
+                toggleStatus.textContent = "Off";
+            }
+        }
+
+        function updateCleanRestrooms() {
+            const toggleValue = document.getElementById("toggleSwitch3").checked;
+
+            const data = {
+                toggleValue: toggleValue,
+            };
+
+            fetch('/updateCleanRestrooms', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+                togglePopup3();
+                window.location.reload();
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+        }
+    </script>
+    <script>
+        function togglePopup4() {
+            const popup = document.getElementById("popup4");
+            popup.style.display = popup.style.display === "flex" ? "none" : "flex";
+        }
+
+        function toggleForm4() {
+            const toggleSwitch = document.getElementById("toggleSwitch4");
+            const toggleStatus = document.getElementById("toggleStatus4");
+
+            if (toggleSwitch.checked) {
+                toggleStatus.textContent = "On";
+            } else {
+                toggleStatus.textContent = "Off";
+            }
+        }
+
+        function updateGenderSeparatedRestrooms() {
+            const toggleValue = document.getElementById("toggleSwitch4").checked;
+
+            const data = {
+                toggleValue: toggleValue,
+            };
+
+            fetch('/updateGenderSeparatedRestrooms', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(data),
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+                togglePopup4();
+                window.location.reload();
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+        }
+    </script>
+</body>
+
+</html>

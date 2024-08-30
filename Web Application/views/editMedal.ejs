@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <% medal.forEach(medal=> { %>
+        <title><%= medal.name %></title>
+    <% }); %>
+    <link rel="stylesheet" href="css/editMedalStyles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <nav>
+        <div class="menu">
+            <div class="menu_links">
+                <a href="/medal_manage" class="link"><i class="fa-solid fa-arrow-left"></i></a>
+                <a href="/" class="link">Home</a>
+            </div>
+        </div>
+    </nav>
+
+    <div>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+    </div>
+
+    <% medal.forEach(medal => { %>
+        <div class="torow">
+            <div class="container">
+                <div class="to-center">
+                    <h2>Lock</h2>
+                    <br>
+                    <img src="<%= medal.lock %>" alt="">
+                </div>
+                <button id="editButton" class="custom-btn">Edit</button>
+            </div>
+    
+            <div class="container">
+                <div class="to-center">
+                    <h2>Unlock</h2>
+                    <br>
+                    <img src="<%= medal.unlock %>" alt="">
+                </div>
+                <button id="editButton1" class="custom-btn">Edit</button>
+            </div>  
+        </div>
+
+        <div id="editPopup" class="popup">
+            <div class="popup-content">
+                <span id="closePopup" class="close">&times;</span>
+                <h2>Edit Lock Medal Image</h2>
+                <form id="editForm" action="/updatemedal/lock/<%= medal.name %>" method="POST" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label for="image">Select new lock medal image:</label>
+                        <input type="file" id="image" name="image" accept="image/*">
+                        <img id="imagePreview" src="#"  class="image-preview">
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn-save">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div> 
+
+        <div id="editPopup1" class="popup">
+            <div class="popup-content">
+                <span id="closePopup1" class="close">&times;</span>
+                <h2>Edit Unlock Medal Image</h2>
+                <form id="editForm" action="/updatemedal/unlock/<%= medal.name %>" method="POST" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label for="image">Select new unlock medal image:</label>
+                        <input type="file" id="image1" name="image" accept="image/*">
+                        <img id="imagePreview1" src="#"  class="image-preview">
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn-save">Save</button>
+                    </div>
+                </form>
+            </div>
+        </div> 
+    <% }); %>
+
+    <!-- Jquery needed -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="js/editMedalScript.js"></script>
+</body>
+</html>

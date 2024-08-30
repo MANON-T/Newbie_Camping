@@ -1,0 +1,559 @@
+@import url("https://fonts.googleapis.com/css?family=Barlow+Condensed:300,400,500,600,700,800,900|Barlow:300,400,500,600,700,800,900&display=swap");
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ul,
+li,
+button,
+a,
+i,
+input,
+body {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border: 0;
+  -webkit-tap-highlight-color: transparent;
+  text-decoration: none;
+  color: inherit;
+}
+
+h1:focus,
+h2:focus,
+h3:focus,
+h4:focus,
+h5:focus,
+h6:focus,
+p:focus,
+ul:focus,
+li:focus,
+button:focus,
+a:focus,
+i:focus,
+input:focus,
+body:focus {
+  outline: 0;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  height: auto;
+  font-family: "Barlow", sans-serif;
+  background: #695681;
+}
+
+.logo {
+  position: fixed;
+  z-index: 5;
+  bottom: 10px;
+  right: 10px;
+  width: 40px;
+  height: 40px;
+  border-radius: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 100%;
+  backdrop-filter: blur(5px);
+}
+
+.logo img {
+  width: 55%;
+  height: 55%;
+  transform: translateY(-1px);
+  opacity: 0.8;
+}
+
+nav .menu {
+  width: 100%;
+  height: 80px;
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 5%;
+  box-sizing: border-box;
+  z-index: 3;
+  margin-bottom: 200px; /* ปรับค่าตามความต้องการ */
+}
+
+nav .menu .website_name {
+  color: #695681;
+  font-weight: 600;
+  font-size: 20px;
+  letter-spacing: 1px;
+  background: white;
+  padding: 4px 8px;
+  border-radius: 2px;
+  opacity: 0.5;
+  transition: all 0.4s ease;
+  cursor: pointer;
+}
+
+nav .menu .website_name:hover {
+  opacity: 1;
+}
+
+nav .menu .menu_links {
+  transition: all 0.4s ease;
+  opacity: 0.5;
+}
+
+nav .menu .menu_links:hover {
+  opacity: 1;
+}
+
+@media screen and (max-width: 799px) {
+  nav .menu .menu_links {
+    display: none;
+  }
+}
+
+nav .menu .menu_links .link {
+  color: white;
+  text-transform: uppercase;
+  font-weight: 500;
+  margin-right: 50px;
+  letter-spacing: 2px;
+  position: relative;
+  transition: all 0.3s 0.2s ease;
+}
+
+nav .menu .menu_links .link:last-child {
+  margin-right: 0;
+}
+
+nav .menu .menu_links .link:before {
+  content: "";
+  position: absolute;
+  width: 0px;
+  height: 4px;
+  background: linear-gradient(90deg, #ffedc0 0%, #ff9d87 100%);
+  bottom: -10px;
+  border-radius: 4px;
+  transition: all 0.4s cubic-bezier(0.82, 0.02, 0.13, 1.26);
+  left: 100%;
+}
+
+nav .menu .menu_links .link:hover {
+  opacity: 1;
+  color: #fb8a8a;
+}
+
+nav .menu .menu_links .link:hover:before {
+  width: 40px;
+  left: 0;
+}
+
+nav .menu .menu_icon {
+  width: 40px;
+  height: 40px;
+  position: relative;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 799px) {
+  nav .menu .menu_icon {
+    display: flex;
+  }
+}
+
+nav .menu .menu_icon .icon {
+  width: 24px;
+  height: 2px;
+  background: white;
+  position: absolute;
+}
+
+nav .menu .menu_icon .icon:before,
+nav .menu .menu_icon .icon:after {
+  content: "";
+  width: 100%;
+  height: 100%;
+  background: inherit;
+  position: absolute;
+  transition: all 0.3s cubic-bezier(0.49, 0.04, 0, 1.55);
+}
+
+nav .menu .menu_icon .icon:before {
+  transform: translateY(-8px);
+}
+
+nav .menu .menu_icon .icon:after {
+  transform: translateY(8px);
+}
+
+nav .menu .menu_icon:hover .icon {
+  background: #ffedc0;
+}
+
+nav .menu .menu_icon:hover .icon:before {
+  transform: translateY(-10px);
+}
+
+nav .menu .menu_icon:hover .icon:after {
+  transform: translateY(10px);
+}
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  padding: 20px;
+  justify-content: center;
+}
+
+.form-card {
+  width: 800px;
+  height: 100%;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  background: #fff;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  /* เพิ่มเพื่อให้ .top-right อยู่ในตำแหน่งที่ถูกต้อง */
+  margin-top: 100px;
+  max-height: 70vh; /* กำหนดความสูงสูงสุดของ popup */
+  overflow-y: auto; /* เพิ่มการเลื่อนในแนวตั้ง */
+}
+
+input[type="text"] {
+  width: 40%;
+  height: 10px;
+  padding: 0.5rem;
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+  font-size: 1rem;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+input[type="number"] {
+  width: 40%;
+  height: 10px;
+  padding: 0.5rem;
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+  font-size: 1rem;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+label {
+  font-size: medium;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.service {
+  justify-content: center;
+  text-align: center;
+  margin: 10px;
+  align-items: center;
+}
+
+.service input[type="number"] {
+  width: 80px;
+  height: 10px;
+  padding: 0.5rem;
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ced4da;
+  border-radius: 0.25rem;
+  font-size: 1rem;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.container .form-card .title .custom-btn {
+  display: inline-block;
+  font-weight: 400;
+  color: #fff;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+  background-color: black;
+  border: 1px solid black;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  border-radius: 0.25rem;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+    border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.custom-btn {
+  display: inline-block;
+  font-weight: 400;
+  color: #fff;
+  text-align: center;
+  vertical-align: middle;
+  cursor: pointer;
+  background-color: black;
+  border: 1px solid black;
+  padding: 0.375rem 0.75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  border-radius: 0.25rem;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out,
+    border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.custom-btn:hover {
+  background-color: #36383a;
+  border-color: #36383a;
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px; /* ลดระยะห่างระหว่างการ์ด */
+}
+
+.card {
+  background: #f0f0f0;
+  padding: 10px; /* ลดขนาด padding ภายในการ์ด */
+  border-radius: 8px; /* ลดขนาดขอบมน */
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1); /* ลดขนาดเงาของการ์ด */
+  margin: 3%;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* จัดวางเนื้อหาให้อยู่ตรงกลาง */
+  text-align: center;
+}
+
+.card label {
+  display: block;
+  margin-bottom: 5px; /* ลดระยะห่างระหว่าง label และ input */
+  font-weight: bold;
+  font-size: 14px; /* ลดขนาดฟอนต์ของ label */
+}
+
+.card input {
+  width: 40%;
+  height: fit-content;
+  padding: 6px; /* ลดขนาด padding ของ input */
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px; /* ลดขนาดฟอนต์ของ input */
+}
+
+.icon-container {
+  width: 60px;
+  /* Width of the circle */
+  height: 60px;
+  /* Height of the circle */
+  background-color: #a0d9ff;
+  /* Light blue background */
+  border-radius: 50%;
+  /* Makes it a circle */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 10px;
+  /* Space between the icon and the text */
+}
+
+.icon-container i {
+  font-size: 24px;
+  /* Size of the icon */
+  color: #333;
+  /* Color of the icon */
+}
+
+/* General wrapper to align label and toggle */
+.toggle-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.toggle-wrapper label {
+  margin-right: 15px; /* Adjust spacing between label and toggle */
+  cursor: pointer;
+}
+
+/* Style for the toggle switch */
+.toggle-container {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 30px;
+  justify-content: center;
+}
+
+.toggle-container input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  border-radius: 30px;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 24px;
+  width: 24px;
+  left: 3px;
+  bottom: 3px;
+  background-color: white;
+  border-radius: 50%;
+  transition: 0.4s;
+}
+
+input:checked + .slider {
+  background-color: #4caf50;
+}
+
+input:checked + .slider:before {
+  transform: translateX(30px);
+}
+
+/* Hide size inputs by default */
+.size-inputs {
+  display: none;
+  margin-top: 10px;
+}
+
+.size-inputs label {
+  display: block;
+  margin-top: 5px;
+}
+
+.size-inputs input {
+  width: 100%;
+  padding: 5px;
+  margin-bottom: 10px;
+}
+
+/* Center the label and toggle switch */
+.toggle-label {
+  margin-right: 15px; /* Adjust spacing between label and toggle */
+  cursor: pointer;
+}
+
+/* Add these styles to your CSS file */
+
+.progress-indicator {
+  text-align: center;
+  margin-bottom: 20px;
+  margin-top: 60px;
+  height: 40px;
+  width: 90px;
+  border-radius: 5px;
+  background-color: white;
+}
+
+#progress-bar {
+  width: 33%; /* Adjust based on number of steps */
+  height: 4px;
+  background-color: #4caf50;
+  border-radius: 5px;
+  margin: 0 auto;
+  transition: width 0.3s ease;
+}
+
+#step-indicator {
+  margin-top: 5px;
+}
+
+.form-navigation {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+#back-button,
+#next-button {
+  padding: 10px 20px;
+  border: none;
+  background-color: #4caf50;
+  color: white;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+#back-button:disabled {
+  background-color: #ccc;
+}
+
+.input-group {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  justify-content: center;
+}
+
+.input-group input[type="text"] {
+  margin-right: 10px;
+}
+
+.input-group button {
+  background-color: #ff6666;
+  border: none;
+  padding: 5px;
+  cursor: pointer;
+  color: white;
+  border-radius: 4px;
+}
+
+#addInputBtn , #addInputBtn1 {
+  background-color: #4caf50;
+  border: none;
+  color: white;
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 4px;
+  margin-top: 10px;
+}
+
+.signal-container {
+  display: flex;
+  flex-direction: row; /* เปลี่ยนเป็น row หากต้องการให้แสดงผลในแนวนอน */
+  gap: 15px;
+  margin-top: 20px;
+  justify-content: center;
+}
+
+.signal-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.signal-group label {
+  font-weight: bold;
+  margin-right: 10px;
+  min-width: 50px; /* เพิ่มระยะห่างระหว่าง label และ select */
+}
+
+.signal-group select {
+  padding: 5px;
+  font-size: 16px;
+  border-radius: 5px;
+}
+

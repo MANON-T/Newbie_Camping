@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Tip</title>
+    <link rel="stylesheet" href="css/articleStyles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-137426789-2');
+    </script>
+</head>
+
+<body cz-shortcut-listen="true">
+    <nav>
+        <div class="menu">
+            <div class="menu_links">
+                <a href="/" class="link">Home</a>
+            </div>
+            <!-- <p class="website_name">Newbie Camping</p> -->
+            <div class="menu_links">
+                <a href="/campsite" class="link"><i class="fa-solid fa-location-dot"></i> Location</a>
+                <a href="/add_article" class="link"><i class="fa-solid fa-pen"></i> Write a tip</a>
+                <a href="/medal_manage" class="link"><i class="fa-solid fa-list-check"></i> Manage stamps</a>
+            </div>
+            <div class="menu_icon">
+                <span class="icon"></span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="wrapper">
+        <div class="content">
+            <% tip.forEach(tip => { %>
+              <div class="card" onclick="goToDetail('<%= tip.topic %>')">
+                <figure class="card__imageBg">
+                  <img src="<%= tip.imageURL %>" alt="<%= tip.topic %>">
+                </figure>
+                <article class="card__text">
+                  <h2 class="card__title">
+                    <%= tip.topic %>
+                  </h2>
+                </article>
+              </div>
+            <% }); %>
+          </div>
+    </div>
+
+    <!-- Jquery needed -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="js/articleScript.js"></script>
+    <script>
+        function goToDetail(tipTopic) {
+            const form = document.createElement('form');
+            form.method = 'POST';
+            form.action = '/tipDetail';
+
+            const input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = 'tipTopic';
+            input.value = tipTopic;
+
+            form.appendChild(input);
+            document.body.appendChild(form);
+            form.submit();
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tag & Bag</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/tag&backpackStyles.css">
+</head>
+
+<body>
+    <nav>
+        <div class="menu">
+            <div class="menu_links">
+                <a href="/campsite" class="link"><i class="fa-solid fa-arrow-left"></i></a>
+                <a href="/" class="link">Home</a>
+            </div>
+            <div class="menu_links">
+                <% campsite.forEach(campsite=> { %>
+                    <a href="/detail" class="link"><i class="fa-solid fa-info"></i> Info</a>
+                    <a href="/gallery" class="link"><i class="fa-solid fa-images"></i> Gallery</a>
+                    <a href="" class="link"><i class="fa-solid fa-person-walking-luggage"></i> Tag & Backpack</a>
+                <% }); %>
+            </div>
+            <div class="menu_icon">
+                <span class="icon"></span>
+            </div>
+        </div>
+    </nav>
+    <% campsite.forEach(campsite => { %>
+        <!-- Container ที่มีตัวเลือกแรก -->
+        <div class="container">
+            <div class="card">
+                <form id="selectForm">
+                    <label for="selection" class="form-label">Choose a search tag:</label>
+                    <select id="selection" name="selection" class="form-select">
+                        <% 
+                            const selectedTags = campsite.tag.map(tag => tag.trim());
+                            const options = ["สำหรับมือใหม่", "ประหยัดงบ", "ค่าเข้าฟรี", "มีเต้นบริการ", "สายลุย"];
+                            options.forEach(option => {
+                                if (!selectedTags.includes(option)) {
+                                    %>
+                                    <option value="<%= option %>"><%= option %></option>
+                                    <%
+                                }
+                            });
+                        %>
+                    </select>
+                    <button type="button" class="btn btn-primary mt-3" onclick="addResult()">Add</button>
+                </form>
+                <div class="resultsWrapper">
+                    <% if (campsite.tag.length > 0) { %>
+                        <% campsite.tag.forEach(tag => { %>
+                            <div class="resultsContainer mt-3" data-pre-existing-results="<%= tag %>">
+                                <!-- Display stacked results here -->
+                            </div>
+                        <% }); %>
+                    <% } else { %>
+                        <!-- Create a default empty resultsContainer if no tags exist -->
+                        <div class="resultsContainer mt-3"></div>
+                    <% } %>
+                </div>
+                <button type="button" class="btn btn-success mt-3" onclick="saveTags()">Save</button>
+            </div>
+
+
+            <div class="card">
+                <form id="selectForm2">
+                    <label for="selection2" class="form-label">Choose a sugges tag:</label>
+                    <select id="selection2" name="selection2" class="form-select">
+                        <% 
+                            const selectedTags2 = campsite.sugges_tag.map(tag => tag.trim());
+                            const options2 = ["#CampLover", "#NatureExplorer", "#WildCook", "#MountainClimber", 
+                            "#BeachCamper", "#SoloCamper", "#FamilyCamper", "#EcoFriendlyCamper"];
+                            options2.forEach(option => {
+                                if (!selectedTags2.includes(option)) {
+                                    %>
+                                    <option value="<%= option %>"><%= option %></option>
+                                    <%
+                                }
+                            });
+                        %>
+                    </select>
+                    <button type="button" class="btn btn-primary mt-3" onclick="addResult2()">Add</button>
+                </form>
+                <div class="resultsWrapper">
+                    <% if (campsite.sugges_tag.length > 0) { %>
+                        <% campsite.sugges_tag.forEach(tag => { %>
+                            <div class="resultsContainer2 mt-3" data-pre-existing-results="<%= tag %>">
+                                <!-- Display stacked results here -->
+                            </div>
+                        <% }); %>
+                    <% } else { %>
+                        <!-- Create a default empty resultsContainer2 if no sugges tags exist -->
+                        <div class="resultsContainer2 mt-3"></div>
+                    <% } %>
+                </div>
+                <button type="button" class="btn btn-success mt-3" onclick="saveTags2()">Save</button>
+            </div>
+        </div>
+
+        <div class="backpack-container">
+            <div class="backpack-card1">
+                <h4>For Newbie</h4>
+                <br>
+                <div class="image-container">
+                    <img src="images/camping.png">
+                </div>
+                <br>
+                <div class="item-container">
+                    <% campsite.newbie_backpack.forEach(newbie_backpack => { %>
+                    <li><%= newbie_backpack %></li>
+                    <% }); %>
+                </div>
+                <br>
+                <button type="button" class="custom-btn" id="edit-btn-newbie">Edit</button>
+            </div>
+
+            <div class="popup-overlay" id="popup-overlay">
+                <div class="popup-content">
+                    <h2>Edit bag for newbie</h2>
+                    <br>
+                    <form action="/updateNewbieBag/<%= campsite.name %>" method="post" id="newbie-form">
+                        <!-- กำหนดให้มีรายการกิจกรรมที่เป็น Form แต่ละอัน -->
+                        <div id="newbie-list">
+                            <% campsite.newbie_backpack.forEach((newbie_backpack, index) => { %>
+                            <div class="newbie-item">
+                                <input type="text" name="newbie[]" value="<%= newbie_backpack %>" />
+                                <button type="button" class="delete-btn" onclick="removeNewbie(this)"><i class="fa-solid fa-trash-can"></i></button>
+                            </div>
+                            <% }); %>
+                        </div>
+                        <!-- ปุ่มเพิ่ม Form ใหม่ -->
+                        <button type="button" id="add-newbie-btn">+</button>
+                        <br>
+                        <!-- ปุ่มบันทึกและรีเซ็ต -->
+                        <button class="save-btn" type="submit" onclick="return confirm('After save we will return to campsite page for set new information.')">Save</button>
+                        <button class="reset-btn" type="reset">Reset</button>
+                    </form>
+                    <button class="close-btn" id="close-btn">Close</button>
+                </div>
+            </div>
+
+            <div class="backpack-card2">
+                <h4>For Common type 1</h4>
+                <br>
+                <div class="image-container">
+                    <img src="images/camping-chair.png">
+                </div>
+                <br>
+                <div class="item-container">
+                    <% campsite.common_backpack1.forEach(common_backpack1 => { %>
+                    <li><%= common_backpack1 %></li>
+                    <% }); %>
+                </div>
+                <br>
+                <button type="button" class="custom-btn" id="edit-btn-common1">Edit</button>
+            </div>
+
+            <div class="popup-overlay" id="popup-overlay1">
+                <div class="popup-content">
+                    <h2>Edit bag for common type 1</h2>
+                    <br>
+                    <form action="/updateCommon1/<%= campsite.name %>" method="post" id="common1-form">
+                        <!-- กำหนดให้มีรายการกิจกรรมที่เป็น Form แต่ละอัน -->
+                        <div id="common1-list">
+                            <% campsite.common_backpack1.forEach((common_backpack1, index) => { %>
+                            <div class="common1-item">
+                                <input type="text" name="common1[]" value="<%= common_backpack1 %>" />
+                                <button type="button" class="delete-btn" onclick="removeCommon1(this)"><i class="fa-solid fa-trash-can"></i></button>
+                            </div>
+                            <% }); %>
+                        </div>
+                        <!-- ปุ่มเพิ่ม Form ใหม่ -->
+                        <button type="button" id="add-common1-btn">+</button>
+                        <br>
+                        <!-- ปุ่มบันทึกและรีเซ็ต -->
+                        <button class="save-btn" type="submit" onclick="return confirm('After save we will return to campsite page for set new information.')">Save</button>
+                        <button class="reset-btn" type="reset">Reset</button>
+                    </form>
+                    <button class="close-btn" id="close-btn1">Close</button>
+                </div>
+            </div>
+
+
+            <div class="backpack-card2">
+                <h4>For Common type 2</h4>
+                <br>
+                <div class="image-container">
+                    <img src="images/camping_1.png">
+                </div>
+                <br>
+                <div class="item-container">
+                    <% campsite.common_backpack2.forEach(common_backpack2 => { %>
+                    <li><%= common_backpack2 %></li>
+                    <% }); %>
+                </div>
+                <br>
+                <button type="button" class="custom-btn" id="edit-btn-common2">Edit</button>
+            </div>
+
+            <div class="popup-overlay" id="popup-overlay2">
+                <div class="popup-content">
+                    <h2>Edit bag for common type 2</h2>
+                    <br>
+                    <form action="/updateCommon2/<%= campsite.name %>" method="post" id="common2-form">
+                        <!-- กำหนดให้มีรายการกิจกรรมที่เป็น Form แต่ละอัน -->
+                        <div id="common2-list">
+                            <% campsite.common_backpack2.forEach((common_backpack2, index) => { %>
+                            <div class="common2-item">
+                                <input type="text" name="common2[]" value="<%= common_backpack2 %>" />
+                                <button type="button" class="delete-btn" onclick="removeCommon2(this)"><i class="fa-solid fa-trash-can"></i></button>
+                            </div>
+                            <% }); %>
+                        </div>
+                        <!-- ปุ่มเพิ่ม Form ใหม่ -->
+                        <button type="button" id="add-common2-btn">+</button>
+                        <br>
+                        <!-- ปุ่มบันทึกและรีเซ็ต -->
+                        <button class="save-btn" type="submit" onclick="return confirm('After save we will return to campsite page for set new information.')">Save</button>
+                        <button class="reset-btn" type="reset">Reset</button>
+                    </form>
+                    <button class="close-btn" id="close-btn2">Close</button>
+                </div>
+            </div>
+        </div>
+    <% }); %>
+    <script src="js/tag&backpackScript.js"></script>
+    <script>
+        const editBtnnewbie = document.getElementById('edit-btn-newbie');
+        const popupOverlay = document.getElementById('popup-overlay');
+        const closeBtn = document.getElementById('close-btn');
+        const editBtncommon1 = document.getElementById('edit-btn-common1');
+        const popupOverlay1 = document.getElementById('popup-overlay1');
+        const closeBtn1 = document.getElementById('close-btn1');
+        const editBtncommon2 = document.getElementById('edit-btn-common2');
+        const popupOverlay2 = document.getElementById('popup-overlay2');
+        const closeBtn2 = document.getElementById('close-btn2');
+
+        editBtnnewbie.addEventListener('click', () => {
+            popupOverlay.style.display = 'flex';
+        });
+        closeBtn.addEventListener('click', () => {
+            popupOverlay.style.display = 'none';
+        });
+        editBtncommon1.addEventListener('click', () => {
+            popupOverlay1.style.display = 'flex';
+        });
+        closeBtn1.addEventListener('click', () => {
+            popupOverlay1.style.display = 'none';
+        });
+        editBtncommon2.addEventListener('click', () => {
+            popupOverlay2.style.display = 'flex';
+        });
+        closeBtn2.addEventListener('click', () => {
+            popupOverlay2.style.display = 'none';
+        });
+
+        window.addEventListener('click', (e) => {
+            if (e.target === popupOverlay) {
+                popupOverlay.style.display = 'none';
+            }
+            if (e.target === popupOverlay1) {
+                popupOverlay1.style.display = 'none';
+            }
+            if (e.target === popupOverlay2) {
+                popupOverlay2.style.display = 'none';
+            }
+        });
+    </script>
+</body>
+
+</html>
