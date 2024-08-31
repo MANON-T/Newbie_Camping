@@ -174,16 +174,16 @@
                     <br>
                     <form action="/updateEntryfee/<%= campsite.name %>" method="post">
                         <label for="">Adult Entry Fee</label>
-                        <input type="text" name="adult_entry_fee" id="adult_entry_fee" value="<%= campsite.adult_entry_fee %>">฿
+                        <input type="number" name="adult_entry_fee" id="adult-fee" value="<%= campsite.adult_entry_fee %>" min="0">฿
                         <br>
                         <label for="">Child Entry Fee</label>
-                        <input type="text" name="child_entry_fee" id="" value="<%= campsite.child_entry_fee %>">฿
+                        <input type="number" name="child_entry_fee" id="child-fee" value="<%= campsite.child_entry_fee %>" min="0">฿
                         <br>
                         <label for="">Parking Fee</label>
-                        <input type="text" name="parking_fee" id="" value="<%= campsite.parking_fee %>">฿
+                        <input type="number" name="parking_fee" id="parking-fee" value="<%= campsite.parking_fee %>" min="0">฿
                         <br>
                         <label for="">Camping Fee</label>
-                        <input type="text" name="camping_fee" id="" value="<%= campsite.camping_fee %>">฿
+                        <input type="number" name="camping_fee" id="camping-fee" value="<%= campsite.camping_fee %>" min="0">฿
                         <br>
                         <button class="save-btn" type="submit">Save</button>
                         <button class="reset-btn" type="reset">Reset</button>
@@ -237,15 +237,15 @@
                                 <div class="form-row">
                                     <br>
                                     <label for="smallSize">Small Size</label>
-                                    <input type="number" id="smallSize" name="smallSize" value="<%= campsite.House[0] %>">
+                                    <input type="number" id="smallSize" name="smallSize" value="<%= campsite.House[0] %>" min="0">
                                 </div>
                                 <div class="form-row">
                                     <label for="mediumSize">Medium Size</label>
-                                    <input type="number" id="mediumSize" name="mediumSize" value="<%= campsite.House[1] %>">
+                                    <input type="number" id="mediumSize" name="mediumSize" value="<%= campsite.House[1] %>" min="0">
                                 </div>
                                 <div class="form-row">
                                     <label for="largeSize">Large Size</label>
-                                    <input type="number" id="largeSize" name="largeSize" value="<%= campsite.House[2] %>">
+                                    <input type="number" id="largeSize" name="largeSize" value="<%= campsite.House[2] %>" min="0">
                                 </div>
                             </form>
                         </div>
@@ -562,6 +562,60 @@
             // ตรวจสอบว่าค่าอยู่ในช่วงที่กำหนด
             if (input.value < 0) input.value = 0;
             if (input.value > 100) input.value = 100;
+        });
+        const smallSize = document.getElementById('smallSize');
+        smallSize.addEventListener('input', function (e) {
+            // ลบตัวอักษรที่ไม่ใช่ตัวเลข
+            const sanitizedValue = smallSize.value.replace(/[^0-9]/g, '');
+            smallSize.value = sanitizedValue;
+            
+            // ตรวจสอบว่าค่าอยู่ในช่วงที่กำหนด
+            if (smallSize.value < 0) smallSize.value = 0;
+        });
+        const mediumSize = document.getElementById('mediumSize');
+        mediumSize.addEventListener('input', function (e) {
+            // ลบตัวอักษรที่ไม่ใช่ตัวเลข
+            const sanitizedValue = mediumSize.value.replace(/[^0-9]/g, '');
+            mediumSize.value = sanitizedValue;
+            
+            // ตรวจสอบว่าค่าอยู่ในช่วงที่กำหนด
+            if (mediumSize.value < 0) mediumSize.value = 0;
+        });
+        const largeSize = document.getElementById('largeSize');
+        largeSize.addEventListener('input', function (e) {
+            // ลบตัวอักษรที่ไม่ใช่ตัวเลข
+            const sanitizedValue = largeSize.value.replace(/[^0-9]/g, '');
+            largeSize.value = sanitizedValue;
+            
+            // ตรวจสอบว่าค่าอยู่ในช่วงที่กำหนด
+            if (largeSize.value < 0) largeSize.value = 0;
+        });
+        const smallSize1 = document.getElementById('smallSize1');
+        smallSize1.addEventListener('input', function (e) {
+            // ลบตัวอักษรที่ไม่ใช่ตัวเลข
+            const sanitizedValue = smallSize1.value.replace(/[^0-9]/g, '');
+            smallSize1.value = sanitizedValue;
+            
+            // ตรวจสอบว่าค่าอยู่ในช่วงที่กำหนด
+            if (smallSize1.value < 0) smallSize1.value = 0;
+        });
+        const mediumSize1 = document.getElementById('mediumSize1');
+        mediumSize1.addEventListener('input', function (e) {
+            // ลบตัวอักษรที่ไม่ใช่ตัวเลข
+            const sanitizedValue = mediumSize1.value.replace(/[^0-9]/g, '');
+            mediumSize1.value = sanitizedValue;
+            
+            // ตรวจสอบว่าค่าอยู่ในช่วงที่กำหนด
+            if (mediumSize1.value < 0) medimediumSize1umSize.value = 0;
+        });
+        const largeSize1 = document.getElementById('largeSize1');
+        largeSize1.addEventListener('input', function (e) {
+            // ลบตัวอักษรที่ไม่ใช่ตัวเลข
+            const sanitizedValue = largeSize1.value.replace(/[^0-9]/g, '');
+            largeSize1.value = sanitizedValue;
+            
+            // ตรวจสอบว่าค่าอยู่ในช่วงที่กำหนด
+            if (largeSize1.value < 0) largeSize1.value = 0;
         });
     </script>
     <script>
