@@ -95,7 +95,7 @@
                         <input type="text" name="name" id="" value="<%= campsite.name %>">
                         <br>
                         <label for="">Score: </label>
-                        <input type="number" name="score" id="" value="<%= campsite.camp_score %>" max="100" min="0">
+                        <input type="number" name="score" id="myNumber" value="<%= campsite.camp_score %>" max="100" min="0">
                         <br>
                         <!-- ปุ่มบันทึกและรีเซ็ต -->
                         <button class="save-btn" type="submit" onclick="return confirm('After save we will return to campsite page for set new information.')">Save</button>
@@ -552,6 +552,18 @@
         defer>
     </script>
     <script src="js/detailScript.js"></script>
+    <script>
+        const input = document.getElementById('myNumber');
+        input.addEventListener('input', function (e) {
+            // ลบตัวอักษรที่ไม่ใช่ตัวเลข
+            const sanitizedValue = input.value.replace(/[^0-9]/g, '');
+            input.value = sanitizedValue;
+            
+            // ตรวจสอบว่าค่าอยู่ในช่วงที่กำหนด
+            if (input.value < 0) input.value = 0;
+            if (input.value > 100) input.value = 100;
+        });
+    </script>
     <script>
         function openFileInput(campsiteName) {
             console.log(campsiteName);

@@ -49,7 +49,7 @@
                             onchange="previewImage(event)">
                         <br><br>
                         <label for="">Campsite Score:</label>
-                        <input type="number" name="score" id="" min="0" max="100">
+                        <input type="number" id="myNumber" name="score" id="" min="0" max="100">
                         <br>
                         <label for="">Campsite Name:</label>
                         <input type="text" name="name" id="">
@@ -272,6 +272,77 @@
     </div>
 
     <script src="js/add_formScript.js"></script>
+    <script>
+        const input = document.getElementById('myNumber');
+        input.addEventListener('input', function (e) {
+        // ลบตัวอักษรที่ไม่ใช่ตัวเลข
+        const sanitizedValue = input.value.replace(/[^0-9]/g, '');
+        input.value = sanitizedValue;
+        // ตรวจสอบว่าค่าอยู่ในช่วงที่กำหนด
+        if (input.value < 0) input.value = 0;
+        if (input.value > 100) input.value = 100;
+        });
+        const adult_fee = document.getElementById('adult-fee');
+        adult_fee.addEventListener('input', function () {
+            const sanitizedValue = adult_fee.value.replace(/[^0-9]/g, '');
+            adult_fee.value = sanitizedValue;
+            if (adult_fee.value < 0) adult_fee.value = 0;
+        });
+        const child_fee = document.getElementById('child-fee');
+        child_fee.addEventListener('input', function () {
+            const sanitizedValue = child_fee.value.replace(/[^0-9]/g, '');
+            child_fee.value = sanitizedValue;
+            if (child_fee.value < 0) child_fee.value = 0;
+        });
+        const parking_fee = document.getElementById('parking-fee');
+        parking_fee.addEventListener('input', function () {
+            const sanitizedValue = parking_fee.value.replace(/[^0-9]/g, '');
+            parking_fee.value = sanitizedValue;
+            if (parking_fee.value < 0) parking_fee.value = 0;
+        });
+        const camping_fee = document.getElementById('camping-fee');
+        camping_fee.addEventListener('input', function () {
+            const sanitizedValue = camping_fee.value.replace(/[^0-9]/g, '');
+            camping_fee.value = sanitizedValue;
+            if (camping_fee.value < 0) camping_fee.value = 0;
+        });
+        const small_size = document.getElementById('small-size');
+        small_size.addEventListener('input', function () {
+            const sanitizedValue = small_size.value.replace(/[^0-9]/g, '');
+            small_size.value = sanitizedValue;
+            if (small_size.value < 0) small_size.value = 0;
+        });
+        const medium_size = document.getElementById('medium-size');
+        medium_size.addEventListener('input', function () {
+            const sanitizedValue = medium_size.value.replace(/[^0-9]/g, '');
+            medium_size.value = sanitizedValue;
+            if (medium_size.value < 0) medium_size.value = 0;
+        });
+        const large_size = document.getElementById('large-size');
+        large_size.addEventListener('input', function () {
+            const sanitizedValue = large_size.value.replace(/[^0-9]/g, '');
+            large_size.value = sanitizedValue;
+            if (large_size.value < 0) large_size.value = 0;
+        });
+        const tent_small_size = document.getElementById('tent-small-size');
+        tent_small_size.addEventListener('input', function () {
+            const sanitizedValue = tent_small_size.value.replace(/[^0-9]/g, '');
+            tent_small_size.value = sanitizedValue;
+            if (tent_small_size.value < 0) tent_small_size.value = 0;
+        });
+        const tent_medium_size = document.getElementById('tent-medium-size');
+        tent_medium_size.addEventListener('input', function () {
+            const sanitizedValue = tent_medium_size.value.replace(/[^0-9]/g, '');
+            tent_medium_size.value = sanitizedValue;
+            if (tent_medium_size.value < 0) tent_medium_size.value = 0;
+        });
+        const tent_large_size = document.getElementById('tent-large-size');
+        tent_large_size.addEventListener('input', function () {
+            const sanitizedValue = tent_large_size.value.replace(/[^0-9]/g, '');
+            tent_large_size.value = sanitizedValue;
+            if (tent_large_size.value < 0) tent_large_size.value = 0;
+        });
+    </script>
 </body>
 
 </html>
