@@ -21,7 +21,7 @@
 
 > ตั้งค่า GOOGLE MAP API KEY
 
-สำหรับส่วนของเว็บไซต์นั้นก็จำเป็นต้องใช้ GOOGLE MAP API KEY เช่นกันเนื่องจากตัวเส็บมีการใช้งาน javaScript map API ของทาง Google เพื่อแสดงแผนที่ ส่วนนี้หากได้ทำการตั้งค่าโปรเจค Firebase มาแล้วก็สามารถใช้งาน API Key ตัวเดิมได้เลย แต่ที่ต้องเพิ่มเติมคือตัว API ตัวเดิมจะมีบริการแค่ Directions API และ Maps SDK for Android เท่านั้น ในส่วนนี้ให้เพิ่ม Maps JavaScript API เข้าไปด้วยในหน้าเลือก API ของ Google cloud platform เมื่อเพิ่ม Maps JavaScript API เสร็จแล้วให้ไปยังไฟล์ detail.ejs ที่อยู่ในโฟลเดอร์ views ในบรรทัดที่ 551-553 จะพบกับ script สำหรับใช้งานตัว Googlemap อยู่ให้นำ API ที่ได้จาก Google cloud platform มาใส่แทนคำว่า `YOU_GOOGLEMAP_API_KEY` ภายในโคดได้เลย
+สำหรับส่วนของเว็บไซต์นั้นก็จำเป็นต้องใช้ GOOGLE MAP API KEY เช่นกันเนื่องจากตัวเว็บมีการใช้งาน javaScript map API ของทาง Google เพื่อแสดงแผนที่ ส่วนนี้หากได้ทำการตั้งค่าโปรเจค Firebase มาแล้วก็สามารถใช้งาน API Key ตัวเดิมได้เลย แต่ที่ต้องเพิ่มเติมคือตัว API ตัวเดิมจะมีบริการแค่ Directions API และ Maps SDK for Android เท่านั้น ในส่วนนี้ให้เพิ่ม Maps JavaScript API เข้าไปด้วยในหน้าเลือก API ของ Google cloud platform เมื่อเพิ่ม Maps JavaScript API เสร็จแล้วให้ไปยังไฟล์ detail.ejs ที่อยู่ในโฟลเดอร์ views ในบรรทัดที่ 551-553 จะพบกับ script สำหรับใช้งานตัว Googlemap อยู่ให้นำ API ที่ได้จาก Google cloud platform มาใส่แทนคำว่า `YOU_GOOGLEMAP_API_KEY` ภายในโคดได้เลย
 
     <script  src="https://maps.googleapis.com/maps/api/js?key=YOU GOOGLEMAP API KEY&loading=async&libraries=maps,marker&v=beta"
 		defer>
