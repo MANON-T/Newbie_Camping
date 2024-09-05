@@ -61,7 +61,7 @@ class _AccountScreenState extends State<AccountScreen> {
       'description': 'สำหรับคนสนใจฟาร์มและเกษตร'
     },
     {'tag': '#HomestayExperience', 'description': 'สำหรับคนอยากสัมผัสวิถีชีวิตท้องถิ่น'},
-    {'tag': 'RomanticGetaway', 'description': 'สำหรับคู่รักที่ต้องการพักผ่อน'},
+    {'tag': '#RomanticGetaway', 'description': 'สำหรับคู่รักที่ต้องการพักผ่อน'},
     {
       'tag': '#GardensAndFlowers',
       'description': 'สำหรับคนรักสวนและดอกไม้'
