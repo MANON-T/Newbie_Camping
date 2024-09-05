@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>วิเคราะห์คะแนนสถานที่ตั้งแคมป์</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+
+    <h1>วิเคราะห์คะแนนสถานที่ตั้งแคมป์</h1>
+    <form id="campForm">
+        <!-- ค่าเข้าผู้ใหญ่ -->
+        <label for="entryAdult">ค่าเข้าผู้ใหญ่ (10 คะแนน)</label>
+        <input type="number" id="entryAdult" name="entryAdult" placeholder="กรอกราคา">
+
+        <!-- ค่าเข้าเด็ก -->
+        <label for="entryChild">ค่าเข้าเด็ก (5 คะแนน)</label>
+        <input type="number" id="entryChild" name="entryChild" placeholder="กรอกราคา">
+
+        <!-- ค่าจอดรถ -->
+        <label for="parkingFee">ค่าจอดรถ (5 คะแนน)</label>
+        <input type="number" id="parkingFee" name="parkingFee" placeholder="กรอกราคา">
+
+        <!-- ค่ากางเต้น -->
+        <label for="tentFee">ค่ากางเต้น (5 คะแนน)</label>
+        <input type="number" id="tentFee" name="tentFee" placeholder="กรอกราคา">
+
+        <!-- มีบ้านพัก -->
+        <label>มีบ้านพัก</label>
+        <div class="radio-group">
+            <label><input type="radio" name="cabins" value="yes"> มี</label>
+            <label><input type="radio" name="cabins" value="no"> ไม่มี</label>
+        </div>
+
+        <!-- มีเต้นบริการ -->
+        <label>มีเต้นบริการ</label>
+        <div class="radio-group">
+            <label><input type="radio" name="rentalTents" value="yes"> มี</label>
+            <label><input type="radio" name="rentalTents" value="no"> ไม่มี</label>
+        </div>
+
+        <!-- มีกิจกรรม -->
+        <label for="activities">มีกิจกรรม (10 คะแนน)</label>
+        <input type="number" id="activities" name="activities" placeholder="กรอกจำนวนกิจกรรม">
+
+        <!-- ห้องน้ำสะอาด -->
+        <label>ห้องน้ำสะอาด</label>
+        <div class="radio-group">
+            <label><input type="radio" name="cleanRestroom" value="yes"> มี</label>
+            <label><input type="radio" name="cleanRestroom" value="no"> ไม่มี</label>
+        </div>
+
+        <!-- ห้องน้ำแยกชายหญิง -->
+        <label>ห้องน้ำแยกชายหญิง</label>
+        <div class="radio-group">
+            <label><input type="radio" name="separateRestroom" value="yes"> มี</label>
+            <label><input type="radio" name="separateRestroom" value="no"> ไม่มี</label>
+        </div>
+
+        <!-- สัญญาณโทรศัพท์ TRUE -->
+        <label>สัญญาณโทรศัพท์ TRUE</label>
+        <select id="signalTrue" name="signalTrue">
+            <option value="good">ดี</option>
+            <option value="average">ปานกลาง</option>
+            <option value="bad">แย่</option>
+        </select>
+
+        <!-- สัญญาณโทรศัพท์ DTAC -->
+        <label>สัญญาณโทรศัพท์ DTAC</label>
+        <select id="signalDtac" name="signalDtac">
+            <option value="good">ดี</option>
+            <option value="average">ปานกลาง</option>
+            <option value="bad">แย่</option>
+        </select>
+
+        <!-- สัญญาณโทรศัพท์ AIS -->
+        <label>สัญญาณโทรศัพท์ AIS</label>
+        <select id="signalAis" name="signalAis">
+            <option value="good">ดี</option>
+            <option value="average">ปานกลาง</option>
+            <option value="bad">แย่</option>
+        </select>
+
+        <!-- ราคาบ้านพัก -->
+        <label for="cabinPriceSmall">ราคาบ้านพักเล็ก (10 คะแนน)</label>
+        <input type="number" id="cabinPriceSmall" name="cabinPriceSmall" placeholder="กรอกราคา">
+
+        <label for="cabinPriceMedium">ราคาบ้านพักกลาง (10 คะแนน)</label>
+        <input type="number" id="cabinPriceMedium" name="cabinPriceMedium" placeholder="กรอกราคา">
+
+        <label for="cabinPriceLarge">ราคาบ้านพักใหญ่ (10 คะแนน)</label>
+        <input type="number" id="cabinPriceLarge" name="cabinPriceLarge" placeholder="กรอกราคา">
+
+        <!-- ราคาเต้น -->
+        <label for="tentPriceSmall">ราคาเต้นเล็ก (10 คะแนน)</label>
+        <input type="number" id="tentPriceSmall" name="tentPriceSmall" placeholder="กรอกราคา">
+
+        <label for="tentPriceMedium">ราคาเต้นกลาง (10 คะแนน)</label>
+        <input type="number" id="tentPriceMedium" name="tentPriceMedium" placeholder="กรอกราคา">
+
+        <label for="tentPriceLarge">ราคาเต้นใหญ่ (10 คะแนน)</label>
+        <input type="number" id="tentPriceLarge" name="tentPriceLarge" placeholder="กรอกราคา">
+
+        <div class="button">
+            <button type="button" onclick="calculateScore()">คำนวนคะแนน</button>
+        </div>
+    </form>
+
+    <!-- Popup Modal -->
+    <div id="resultModal" class="modal">
+        <div class="modal-content">
+            <span id="result"></span><br><br>
+            <button class="close-btn" onclick="closeModal()">ปิด</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+
+</html>
