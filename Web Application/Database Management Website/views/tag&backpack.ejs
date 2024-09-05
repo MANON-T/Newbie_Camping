@@ -38,7 +38,9 @@
                     <select id="selection" name="selection" class="form-select">
                         <% 
                             const selectedTags = campsite.tag.map(tag => tag.trim());
-                            const options = ["สำหรับมือใหม่", "ประหยัดงบ", "ค่าเข้าฟรี", "มีเต้นบริการ", "สายลุย"];
+                            const options = ["สำหรับมือใหม่", "ค่าจอดรถฟรี", "ค่าเข้าเด็กฟรี", "ค่าเข้าผู้ใหญ่ฟรี",
+                            "มีกิจกรรม", "มีเต็นท์บริการ", "มีที่พัก", "มีปลั๊กไฟพ่วง", "ห้องน้ำสะอาด", "มีสัญญาณค่าย True",
+                            "มีสัญญาณค่าย Ais", "มีสัญญาณค่าย Dtac"];
                             options.forEach(option => {
                                 if (!selectedTags.includes(option)) {
                                     %>
@@ -72,8 +74,9 @@
                     <select id="selection2" name="selection2" class="form-select">
                         <% 
                             const selectedTags2 = campsite.sugges_tag.map(tag => tag.trim());
-                            const options2 = ["#CampLover", "#NatureExplorer", "#WildCook", "#MountainClimber", 
-                            "#BeachCamper", "#SoloCamper", "#FamilyCamper", "#EcoFriendlyCamper"];
+                            const options2 = ["#Viewpoints", "#MorningMist", "#OutdoorCamping", "#FarmLife", 
+                            "#HomestayExperience", "#RomanticGetaway", "#GardensAndFlowers", "#PhuThapBuek",
+                            "#KhaoKho"];
                             options2.forEach(option => {
                                 if (!selectedTags2.includes(option)) {
                                     %>

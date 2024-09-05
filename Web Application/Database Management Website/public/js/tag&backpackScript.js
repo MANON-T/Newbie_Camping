@@ -33,10 +33,17 @@ function refreshOptions() {
   ).map((item) => item.textContent);
   const options = [
     "สำหรับมือใหม่",
-    "ประหยัดงบ",
-    "ค่าเข้าฟรี",
-    "มีเต้นบริการ",
-    "สายลุย",
+    "ค่าจอดรถฟรี",
+    "ค่าเข้าเด็กฟรี",
+    "ค่าเข้าผู้ใหญ่ฟรี",
+    "มีกิจกรรม",
+    "มีเต็นท์บริการ",
+    "มีที่พัก",
+    "มีปลั๊กไฟพ่วง",
+    "ห้องน้ำสะอาด",
+    "มีสัญญาณค่าย True",
+    "มีสัญญาณค่าย Ais",
+    "มีสัญญาณค่าย Dtac",
   ];
 
   const selectionElement = document.getElementById("selection");
@@ -134,14 +141,15 @@ function refreshOptions2() {
     document.querySelectorAll(".result-item2")
   ).map((item) => item.textContent);
   const options2 = [
-    "#CampLover",
-    "#NatureExplorer",
-    "#WildCook",
-    "#MountainClimber",
-    "#BeachCamper",
-    "#SoloCamper",
-    "#FamilyCamper",
-    "#EcoFriendlyCamper",
+    "#Viewpoints",
+    "#MorningMist",
+    "#OutdoorCamping",
+    "#FarmLife",
+    "#HomestayExperience",
+    "#RomanticGetaway",
+    "#GardensAndFlowers",
+    "#PhuThapBuek",
+    "#KhaoKho",
   ];
 
   const selectionElement2 = document.getElementById("selection2");
@@ -164,45 +172,45 @@ function refreshOptions2() {
   }
 }
 function saveTags2() {
-    const tags = Array.from(document.querySelectorAll(".result-item2")).map(
-      (item) => item.textContent
-    );
-  
-    fetch("/updateSuggesTag", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ tags }),
+  const tags = Array.from(document.querySelectorAll(".result-item2")).map(
+    (item) => item.textContent
+  );
+
+  fetch("/updateSuggesTag", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify({ tags }),
+  })
+    .then((response) => {
+      if (response.ok) {
+        return response.json();
+      } else {
+        throw new Error("Failed to update tags");
+      }
     })
-      .then((response) => {
-        if (response.ok) {
-          return response.json();
-        } else {
-          throw new Error("Failed to update tags");
-        }
-      })
-      .then((data) => {
-        if (data.success) {
-          if (data.redirect) {
-            const userConfirmed = window.confirm(
-              "After save we will return to campsite page for set new information."
-            );
-            if (userConfirmed) {
-              window.location.href = data.redirect; // Redirect ไปยังหน้า /campsite
-            }
-          } else {
-            alert("Tags updated successfully!");
+    .then((data) => {
+      if (data.success) {
+        if (data.redirect) {
+          const userConfirmed = window.confirm(
+            "After save we will return to campsite page for set new information."
+          );
+          if (userConfirmed) {
+            window.location.href = data.redirect; // Redirect ไปยังหน้า /campsite
           }
         } else {
-          throw new Error("Failed to update tags");
+          alert("Tags updated successfully!");
         }
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-        alert("Failed to update tags");
-      });
-  }
+      } else {
+        throw new Error("Failed to update tags");
+      }
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+      alert("Failed to update tags");
+    });
+}
 
 window.onload = function () {
   const resultsContainers = document.querySelectorAll(".resultsContainer");
