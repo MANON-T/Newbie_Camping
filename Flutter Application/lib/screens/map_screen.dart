@@ -48,7 +48,7 @@ class _MapScreenState extends State<MapScreen> {
       if (distanceInMeters < 50 && !_isSnackbarShown) {
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
           content: Text(
-            "ยินดีด้วยตราปั๊ม ${widget.campsite!.name} ปลดล๊อกแล้ว",
+            "ยินดีด้วยตราปั๊ม ${widget.campsite!.name} ปลดล็อคแล้ว",
             style: const TextStyle(fontFamily: 'Itim', fontSize: 17),
           ),
           backgroundColor: Colors.green,
