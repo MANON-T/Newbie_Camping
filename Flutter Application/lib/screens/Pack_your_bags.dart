@@ -359,7 +359,7 @@ class _PackYourBagsState extends State<PackYourBags> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             const Text(
-              "คำนวนค่าใช้จ่าย",
+              "คำนวณค่าใช้จ่าย",
               style: TextStyle(
                   color: kSpotifyTextPrimary,
                   fontSize: 20.0,

@@ -174,7 +174,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.tips_and_updates_outlined),
-            label: 'เกล็ดความรู้',
+            label: 'เกร็ดความรู้',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.map),

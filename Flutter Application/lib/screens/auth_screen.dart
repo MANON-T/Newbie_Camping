@@ -41,13 +41,6 @@ class _AuthScreenState extends State<AuthScreen> {
                     return const CampGuide();
                   }
                 });
-            // if (snapshot.hasData) {
-            //   return HomeScreen(auth: auth, Exp: "");
-            // }
-            // return CampGuide();
-            // return LoginScreen(
-            //   auth: auth,
-            // );
           } else {
             return const CampGuide();
           }

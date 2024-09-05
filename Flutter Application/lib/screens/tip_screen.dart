@@ -43,7 +43,7 @@ class _TipScreen extends State<TipScreen> {
       appBar: AppBar(
         backgroundColor: kSpotifyBackground,
         title: const Text(
-          '🥴 เกล็ดความรู้สำหรับคุณ',
+          '🥴 เกร็ดความรู้สำหรับคุณ',
           style: TextStyle(
               color: kSpotifyTextPrimary, fontSize: 20.0, fontFamily: 'Itim'),
         ),

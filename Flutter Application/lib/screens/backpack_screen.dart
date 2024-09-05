@@ -485,7 +485,7 @@ class _BackpackState extends State<Backpack> {
                     children: [
                       const Padding(
                         padding: EdgeInsets.all(4.0),
-                        child: Text('ตราปั๋มที่ปลดล๊อก',
+                        child: Text('ตราปั๊มที่ปลดล๊อก',
                             style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 25,
@@ -508,7 +508,7 @@ class _BackpackState extends State<Backpack> {
                               return Text('เกิดข้อผิดพลาด: ${snapshot.error}');
                             } else if (!snapshot.hasData ||
                                 snapshot.data == null) {
-                              return const Text('ไม่มีตราปั๋มที่ปลดล๊อก');
+                              return const Text('ไม่มีตราปั๊มที่ปลดล๊อก');
                             } else {
                               MedalModel medal = snapshot.data!;
                               return FutureBuilder<String>(

@@ -42,7 +42,7 @@ class _StampbookpageState extends State<Stampbookpage> {
         ),
         backgroundColor: const Color(0xFF121212),
         title: const Text(
-          'สมุกสะสมตราปั๋ม',
+          'สมุดสะสมตราปั๊ม',
           style: TextStyle(
               color: Color(0xFFFFFFFF), fontSize: 20.0, fontFamily: 'Itim'),
         ),

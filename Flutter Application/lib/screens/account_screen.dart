@@ -48,28 +48,33 @@ class _AccountScreenState extends State<AccountScreen> {
   List<String> selectedTags = [];
   final List<Map<String, String>> tagOptions = [
     {
-      'tag': '#CampLover',
-      'description': 'สำหรับผู้ที่หลงใหลในการตั้งแคมป์เป็นชีวิตจิตใจ'
+      'tag': '#Viewpoints',
+      'description': 'สำหรับคนรักวิวสวยๆ'
     },
     {
-      'tag': '#NatureExplorer',
-      'description': 'สำหรับผู้ที่ชอบสำรวจธรรมชาติและสถานที่ใหม่ๆ'
+      'tag': '#MorningMist',
+      'description': 'สำหรับคนชอบทะเลหมอก'
     },
-    {'tag': '#WildCook', 'description': 'สำหรับผู้ที่ชอบทำอาหารกลางแจ้ง'},
+    {'tag': '#OutdoorCamping', 'description': 'สำหรับคนชอบตั้งแคมป์กลางแจ้ง'},
     {
-      'tag': '#MountainClimber',
-      'description': 'สำหรับผู้ที่ชอบปีนเขาและตั้งแคมป์บนภูเขา'
+      'tag': '#FarmLife',
+      'description': 'สำหรับคนสนใจฟาร์มและเกษตร'
     },
-    {'tag': '#BeachCamper', 'description': 'สำหรับผู้ที่ชอบตั้งแคมป์ที่ชายหาด'},
-    {'tag': '#SoloCamper', 'description': 'สำหรับผู้ที่ชอบการตั้งแคมป์คนเดียว'},
+    {'tag': '#HomestayExperience', 'description': 'สำหรับคนอยากสัมผัสวิถีชีวิตท้องถิ่น'},
+    {'tag': 'RomanticGetaway', 'description': 'สำหรับคู่รักที่ต้องการพักผ่อน'},
     {
-      'tag': '#FamilyCamper',
-      'description': 'สำหรับผู้ที่ชอบตั้งแคมป์กับครอบครัว'
+      'tag': '#GardensAndFlowers',
+      'description': 'สำหรับคนรักสวนและดอกไม้'
     },
     {
-      'tag': '#EcoFriendlyCamper',
+      'tag': '#PhuThapBuek',
       'description':
-          'สำหรับผู้ที่ใส่ใจเรื่องสิ่งแวดล้อมและการตั้งแคมป์แบบรักษ์โลก'
+          'สำหรับคนเที่ยวภูทับเบิก'
+    },
+    {
+      'tag': '#KhaoKho',
+      'description':
+          'สำหรับคนเที่ยวเขาค้อ'
     },
   ];
 

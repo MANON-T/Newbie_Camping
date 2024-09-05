@@ -53,21 +53,56 @@ class Suggestion extends StatelessWidget {
     List<Map<String, dynamic>> buttons = [
       {
         'text': 'สำหรับมือใหม่',
-        'color': Colors.blue.shade200,
+        'color': Colors.red.shade200,
         'tag': 'สำหรับมือใหม่'
       },
-      {'text': 'ประหยัดงบ', 'color': Colors.green.shade200, 'tag': 'ประหยัดงบ'},
       {
-        'text': 'ค่าเข้าฟรี',
+        'text': 'ค่าจอดรถฟรี',
         'color': Colors.orange.shade200,
-        'tag': 'ค่าเข้าฟรี'
+        'tag': 'ค่าจอดรถฟรี'
       },
       {
-        'text': 'มีเต้นบริการ',
-        'color': Colors.purple.shade200,
-        'tag': 'มีเต้นบริการ'
+        'text': 'ค่าเข้าเด็กฟรี',
+        'color': Colors.yellow.shade200,
+        'tag': 'ค่าเข้าเด็กฟรี'
       },
-      {'text': 'สายลุย', 'color': Colors.red.shade200, 'tag': 'สายลุย'},
+      {
+        'text': 'ค่าเข้าผู้ใหญ่ฟรี',
+        'color': Colors.green.shade200,
+        'tag': 'ค่าเข้าผู้ใหญ่ฟรี'
+      },
+      {'text': 'มีกิจกรรม', 'color': Colors.cyan.shade200, 'tag': 'มีกิจกรรม'},
+      {
+        'text': 'มีเต็นท์บริการ',
+        'color': Colors.purple.shade200,
+        'tag': 'มีเต็นท์บริการ'
+      },
+      {'text': 'มีที่พัก', 'color': Colors.pink.shade200, 'tag': 'มีที่พัก'},
+      {
+        'text': 'มีปลั๊กไฟพ่วง',
+        'color': Colors.grey.shade200,
+        'tag': 'มีปลั๊กไฟพ่วง'
+      },
+      {
+        'text': 'ห้องน้ำสะอาด',
+        'color': Colors.indigo.shade200,
+        'tag': 'ห้องน้ำสะอาด'
+      },
+      {
+        'text': 'มีสัญญาณค่าย True',
+        'color': Colors.lightGreenAccent.shade200,
+        'tag': 'มีสัญญาณค่าย True'
+      },
+      {
+        'text': 'มีสัญญาณค่าย Ais',
+        'color': Colors.lightBlue.shade200,
+        'tag': 'มีสัญญาณค่าย Ais'
+      },
+      {
+        'text': 'มีสัญญาณค่าย Dtac',
+        'color': Colors.teal.shade200,
+        'tag': 'มีสัญญาณค่าย Dtac'
+      },
     ];
 
     // Filtering buttons based on the value of Exp
