@@ -14,98 +14,106 @@
     <form id="campForm">
         <!-- ค่าเข้าผู้ใหญ่ -->
         <label for="entryAdult">ค่าเข้าผู้ใหญ่ (10 คะแนน)</label>
-        <input type="number" id="entryAdult" name="entryAdult" placeholder="กรอกราคา">
+        <input type="number" class="custom-form" id="entryAdult" name="entryAdult" placeholder="กรอกราคา">
 
         <!-- ค่าเข้าเด็ก -->
         <label for="entryChild">ค่าเข้าเด็ก (5 คะแนน)</label>
-        <input type="number" id="entryChild" name="entryChild" placeholder="กรอกราคา">
+        <input type="number" class="custom-form" id="entryChild" name="entryChild" placeholder="กรอกราคา">
 
         <!-- ค่าจอดรถ -->
         <label for="parkingFee">ค่าจอดรถ (5 คะแนน)</label>
-        <input type="number" id="parkingFee" name="parkingFee" placeholder="กรอกราคา">
+        <input type="number" class="custom-form" id="parkingFee" name="parkingFee" placeholder="กรอกราคา">
 
         <!-- ค่ากางเต้น -->
         <label for="tentFee">ค่ากางเต้น (5 คะแนน)</label>
-        <input type="number" id="tentFee" name="tentFee" placeholder="กรอกราคา">
+        <input type="number" class="custom-form" id="tentFee" name="tentFee" placeholder="กรอกราคา">
 
-        <!-- มีบ้านพัก -->
-        <label>มีบ้านพัก</label>
-        <div class="radio-group">
-            <label><input type="radio" name="cabins" value="yes"> มี</label>
-            <label><input type="radio" name="cabins" value="no"> ไม่มี</label>
+        <!-- Radio "มีเต้นบริการ" -->
+        <label>มีเต้นบริการหรือไม่ (5 คะแนน):</label><br>
+        <input type="radio" name="hasTentRental" value="yes" onclick="toggleTentPrice(true)"> มี
+        <input type="radio" name="hasTentRental" value="no" onclick="toggleTentPrice(false)"> ไม่มี<br><br>
+
+        <!-- ฟอร์มกรอกราคาเต้น -->
+        <div id="tentPriceForm" class="hidden">
+            <p>ความเหมาะสมของราคาโดยรวม (10 คะแนน)</p>
+            <label>ราคาเต้น (เล็ก): </label>
+            <input type="number" class="custom-form" id="tentPriceSmall" min="0"><br>
+            <label>ราคาเต้น (กลาง): </label>
+            <input type="number" class="custom-form" id="tentPriceMedium" min="0"><br>
+            <label>ราคาเต้น (ใหญ่): </label>
+            <input type="number" class="custom-form" id="tentPriceLarge" min="0"><br><br>
         </div>
 
-        <!-- มีเต้นบริการ -->
-        <label>มีเต้นบริการ</label>
-        <div class="radio-group">
-            <label><input type="radio" name="rentalTents" value="yes"> มี</label>
-            <label><input type="radio" name="rentalTents" value="no"> ไม่มี</label>
+        <!-- Radio "มีบ้านพัก" -->
+        <label>มีบ้านพักหรือไม่ (10 คะแนน):</label><br>
+        <input type="radio" name="hasCabin" value="yes" onclick="toggleCabinPrice(true)"> มี
+        <input type="radio" name="hasCabin" value="no" onclick="toggleCabinPrice(false)"> ไม่มี<br><br>
+
+        <!-- ฟอร์มกรอกราคาบ้านพัก -->
+        <div id="cabinPriceForm" class="hidden">
+            <p>ความเหมาะสมของราคาโดยรวม (10 คะแนน)</p>
+            <label>ราคาบ้านพัก (เล็ก): </label>
+            <input type="number" class="custom-form" id="cabinPriceSmall" min="0"><br>
+            <label>ราคาบ้านพัก (กลาง): </label>
+            <input type="number" class="custom-form" id="cabinPriceMedium" min="0"><br>
+            <label>ราคาบ้านพัก (ใหญ่): </label>
+            <input type="number" class="custom-form" id="cabinPriceLarge" min="0"><br><br>
         </div>
 
         <!-- มีกิจกรรม -->
         <label for="activities">มีกิจกรรม (10 คะแนน)</label>
-        <input type="number" id="activities" name="activities" placeholder="กรอกจำนวนกิจกรรม">
+        <input type="number" class="custom-form" id="activities" name="activities" placeholder="กรอกจำนวนกิจกรรม">
 
         <!-- ห้องน้ำสะอาด -->
-        <label>ห้องน้ำสะอาด</label>
+        <label>ห้องน้ำสะอาด (15 คะแนน)</label>
         <div class="radio-group">
             <label><input type="radio" name="cleanRestroom" value="yes"> มี</label>
             <label><input type="radio" name="cleanRestroom" value="no"> ไม่มี</label>
         </div>
 
         <!-- ห้องน้ำแยกชายหญิง -->
-        <label>ห้องน้ำแยกชายหญิง</label>
+        <label>ห้องน้ำแยกชายหญิง (5 คะแนน)</label>
         <div class="radio-group">
             <label><input type="radio" name="separateRestroom" value="yes"> มี</label>
             <label><input type="radio" name="separateRestroom" value="no"> ไม่มี</label>
         </div>
 
-        <!-- สัญญาณโทรศัพท์ TRUE -->
-        <label>สัญญาณโทรศัพท์ TRUE</label>
-        <select id="signalTrue" name="signalTrue">
-            <option value="good">ดี</option>
-            <option value="average">ปานกลาง</option>
-            <option value="bad">แย่</option>
-        </select>
+        <!-- ไฟฟ้าต่อพ่วง -->
+        <label>ไฟฟ้าต่อพ่วง (5 คะแนน)</label>
+        <div class="radio-group">
+            <label><input type="radio" name="powerAccess" value="yes"> มี</label>
+            <label><input type="radio" name="powerAccess" value="no"> ไม่มี</label>
+        </div>
 
-        <!-- สัญญาณโทรศัพท์ DTAC -->
-        <label>สัญญาณโทรศัพท์ DTAC</label>
-        <select id="signalDtac" name="signalDtac">
-            <option value="good">ดี</option>
-            <option value="average">ปานกลาง</option>
-            <option value="bad">แย่</option>
-        </select>
+        <div>
+            <p>สัญญาณโทรศัพท์โดยรวม (5 คะแนน)</p>
+            <!-- สัญญาณโทรศัพท์ TRUE -->
+            <label>สัญญาณโทรศัพท์ TRUE</label>
+            <select id="signalTrue" class="custom-select" name="signalTrue">
+                <option value="good">ดี</option>
+                <option value="average">ปานกลาง</option>
+                <option value="bad">แย่</option>
+            </select>
 
-        <!-- สัญญาณโทรศัพท์ AIS -->
-        <label>สัญญาณโทรศัพท์ AIS</label>
-        <select id="signalAis" name="signalAis">
-            <option value="good">ดี</option>
-            <option value="average">ปานกลาง</option>
-            <option value="bad">แย่</option>
-        </select>
+            <!-- สัญญาณโทรศัพท์ DTAC -->
+            <label>สัญญาณโทรศัพท์ DTAC</label>
+            <select id="signalDtac" class="custom-select" name="signalDtac">
+                <option value="good">ดี</option>
+                <option value="average">ปานกลาง</option>
+                <option value="bad">แย่</option>
+            </select>
 
-        <!-- ราคาบ้านพัก -->
-        <label for="cabinPriceSmall">ราคาบ้านพักเล็ก (10 คะแนน)</label>
-        <input type="number" id="cabinPriceSmall" name="cabinPriceSmall" placeholder="กรอกราคา">
-
-        <label for="cabinPriceMedium">ราคาบ้านพักกลาง (10 คะแนน)</label>
-        <input type="number" id="cabinPriceMedium" name="cabinPriceMedium" placeholder="กรอกราคา">
-
-        <label for="cabinPriceLarge">ราคาบ้านพักใหญ่ (10 คะแนน)</label>
-        <input type="number" id="cabinPriceLarge" name="cabinPriceLarge" placeholder="กรอกราคา">
-
-        <!-- ราคาเต้น -->
-        <label for="tentPriceSmall">ราคาเต้นเล็ก (10 คะแนน)</label>
-        <input type="number" id="tentPriceSmall" name="tentPriceSmall" placeholder="กรอกราคา">
-
-        <label for="tentPriceMedium">ราคาเต้นกลาง (10 คะแนน)</label>
-        <input type="number" id="tentPriceMedium" name="tentPriceMedium" placeholder="กรอกราคา">
-
-        <label for="tentPriceLarge">ราคาเต้นใหญ่ (10 คะแนน)</label>
-        <input type="number" id="tentPriceLarge" name="tentPriceLarge" placeholder="กรอกราคา">
+            <!-- สัญญาณโทรศัพท์ AIS -->
+            <label>สัญญาณโทรศัพท์ AIS</label>
+            <select id="signalAis" class="custom-select" name="signalAis">
+                <option value="good">ดี</option>
+                <option value="average">ปานกลาง</option>
+                <option value="bad">แย่</option>
+            </select>
+        </div>
 
         <div class="button">
-            <button type="button" onclick="calculateScore()">คำนวนคะแนน</button>
+            <button type="button" class="custom-button" onclick="calculateScore()">คำนวณคะแนน</button>
         </div>
     </form>
 
