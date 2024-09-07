@@ -122,6 +122,7 @@ class _CampsiteScreenState extends State<CampsiteScreen> {
         builder: (context) => MapScreen(
           campsite: campsite,
           userID: widget.auth.currentUser!.uid,
+          isAnonymous: widget.isAnonymous,
         ),
       ),
     );

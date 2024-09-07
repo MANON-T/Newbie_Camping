@@ -925,7 +925,7 @@ class _AccountScreenState extends State<AccountScreen> {
             style: TextStyle(color: kSpotifyTextPrimary, fontFamily: 'Itim'),
           ),
           content: const Text(
-            'ระบบการ์ดชาวแคมป์ให้บริการเฉพาะผู้ที่เข้าสู่ระบบเท่านั้น',
+            'ระบบการ์ดชาวแคมป์ไม่รองรับการบริการสำหรับการเข้าใช้งานแบบไม่ระบุตัวตน',
             style: TextStyle(
                 color: kSpotifyTextSecondary, fontFamily: 'Itim', fontSize: 17),
           ),

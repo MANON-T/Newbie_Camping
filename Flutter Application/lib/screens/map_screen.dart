@@ -18,7 +18,8 @@ const kSpotifyHighlight = Color(0xFF282828);
 class MapScreen extends StatefulWidget {
   final CampsiteModel? campsite;
   final String? userID;
-  const MapScreen({super.key, required this.campsite, required this.userID});
+  final bool? isAnonymous;
+  const MapScreen({super.key, required this.campsite, required this.userID , required this.isAnonymous});
 
   @override
   State<MapScreen> createState() => _MapScreenState();
@@ -45,7 +46,8 @@ class _MapScreenState extends State<MapScreen> {
       );
 
       // สมมุติว่าระยะทางที่ยอมรับได้คือ 50 เมตร
-      if (distanceInMeters < 50 && !_isSnackbarShown) {
+      if (widget.isAnonymous != true) {
+        if (distanceInMeters < 50 && !_isSnackbarShown) {
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
           content: Text(
             "ยินดีด้วยตราปั๊ม ${widget.campsite!.name} ปลดล็อคแล้ว",
@@ -55,6 +57,7 @@ class _MapScreenState extends State<MapScreen> {
         ));
         _isSnackbarShown = true; // ตั้งค่าเป็น true เมื่อแสดงข้อความแล้ว
         _saveUserIDToFirebase();
+      }
       }
     }
   }
@@ -170,7 +173,7 @@ class _MapScreenState extends State<MapScreen> {
 
   Future<void> _cameraToPosition(LatLng pos) async {
     final GoogleMapController controller = await _mapController.future;
-    CameraPosition newCameraPosition = CameraPosition(target: pos, zoom: 13);
+    CameraPosition newCameraPosition = CameraPosition(target: pos, zoom: 18);
     await controller
         .animateCamera(CameraUpdate.newCameraPosition(newCameraPosition));
   }

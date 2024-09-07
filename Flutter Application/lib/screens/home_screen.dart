@@ -144,6 +144,7 @@ class _HomeScreenState extends State<HomeScreen> {
             MapScreen(
               campsite: widget.campsite,
               userID: widget.auth.currentUser!.uid,
+              isAnonymous: widget.auth.currentUser!.isAnonymous,
             ),
             AccountScreen(
               totalCost: widget.totalCost,
