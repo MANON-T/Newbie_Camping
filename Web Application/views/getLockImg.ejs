@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Get Lock Medal Image</title>
+    <link rel="stylesheet" href="css/getLockImgStyles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <nav>
+        <div class="menu">
+            <div class="menu_links">
+                <a href="/tool" class="link"><i class="fa-solid fa-arrow-left"></i></a>
+                <a href="/" class="link">Home</a>
+            </div>
+        </div>
+    </nav>
+
+    <div>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+    </div>
+
+    <div class="container">
+        <div class="to-center">
+            <h2>Upload Image</h2>
+            <br>
+            <form id="imageForm" enctype="multipart/form-data">
+                <input type="file" name="imageFile" id="imageFile" accept="image/*" onchange="previewImage()"><br><br>
+
+                <!-- Preview Original Image -->
+                <h3>Original Image:</h3>
+                <canvas id="originalCanvas"></canvas>
+                <br>
+
+                <!-- Preview Adjusted Image -->
+                <h3>Adjusted Image (Brightness):</h3>
+                <canvas id="adjustedCanvas"></canvas>
+                <br>
+
+                <!-- Download Button -->
+                <button type="button" class="custom-btn" onclick="downloadAdjustedImage()">Get</button>
+            </form>
+        </div>
+    </div>
+
+
+    <script src="js/getLockImgScript.js"></script>
+
+</body>
+
+</html>

@@ -1165,4 +1165,21 @@ router.post(
   }
 );
 
+router.get('/tool', (req, res) => {
+  res.render('tool')
+})
+
+router.get('/tooltype', (req, res) => {
+  const tooltype = req.query.tooltype
+  try {
+    if (tooltype === "Calculator") {
+      res.render('calculateScore')
+    }else{
+      res.render('getLockImg')
+    }
+  } catch (error) {
+    console.error("Error getting", error);
+  }
+});
+
 module.exports = router;

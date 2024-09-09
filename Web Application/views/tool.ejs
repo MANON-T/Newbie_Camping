@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Tool</title>
+    <link rel="stylesheet" href="css/toolStyles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-137426789-2');
+    </script>
+</head>
+
+<body cz-shortcut-listen="true">
+    <nav>
+        <div class="menu">
+            <div class="menu_links">
+                <a href="/" class="link">Home</a>
+            </div>
+            <!-- <p class="website_name">Newbie Camping</p> -->
+            <div class="menu_links">
+                <a href="/campsite" class="link"><i class="fa-solid fa-location-dot"></i> Location</a>
+                <a href="/article" class="link"><i class="fa-solid fa-pen"></i> tip</a>
+                <a href="/medal_manage" class="link"><i class="fa-solid fa-list-check"></i> Manage stamps</a>
+                <a href="" class="link"><i class="fa-solid fa-toolbox"></i></i> Tool</a>
+            </div>
+            <div class="menu_icon">
+                <span class="icon"></span>
+            </div>
+        </div>
+    </nav>
+
+    <div class="wrapper">
+        <div class="content">
+            <div class="card" onclick="goToTool('Calculator')">
+                <figure class="card__imageBg">
+                    <img src="images/calculator.png">
+                </figure>
+                <article class="card__text">
+                    <h2 class="card__title">
+                        Score Calculator
+                    </h2>
+                </article>
+            </div>
+            <div class="card" onclick="goToTool('GetLockImg')">
+                <figure class="card__imageBg">
+                    <img src="images/keylock.png">
+                </figure>
+                <article class="card__text">
+                    <h2 class="card__title">
+                        Get Lock Medal Image
+                    </h2>
+                </article>
+            </div>
+        </div>
+    </div>
+
+    <!-- Jquery needed -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="js/toolScript.js"></script>
+    <script>
+        function goToTool(tooltype) {
+            const form = document.createElement('form');
+            form.method = 'GET';
+            form.action = '/tooltype';
+
+            const input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = 'tooltype';
+            input.value = tooltype;
+
+            form.appendChild(input);
+            document.body.appendChild(form);
+            form.submit();
+        }
+    </script>
+</body>
+
+</html>

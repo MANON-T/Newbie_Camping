@@ -44,7 +44,9 @@ function calculateScore() {
   let cabinsScore = cabins === "yes" ? 10 : 0;
 
   // มีเต้นบริการ
-  const rentalTents = document.querySelector('input[name="hasTentRental"]:checked').value;
+  const rentalTents = document.querySelector(
+    'input[name="hasTentRental"]:checked'
+  ).value;
   let rentalTentsScore = rentalTents === "yes" ? 5 : 0;
 
   // มีกิจกรรม
@@ -52,15 +54,21 @@ function calculateScore() {
   let activitiesScore = activities >= 10 ? 10 : activities;
 
   // ห้องน้ำสะอาด
-  const cleanRestroom = document.querySelector('input[name="cleanRestroom"]:checked').value;
+  const cleanRestroom = document.querySelector(
+    'input[name="cleanRestroom"]:checked'
+  ).value;
   let cleanRestroomScore = cleanRestroom === "yes" ? 15 : 0;
 
   // ห้องน้ำแยกชายหญิง
-  const separateRestroom = document.querySelector('input[name="separateRestroom"]:checked').value;
+  const separateRestroom = document.querySelector(
+    'input[name="separateRestroom"]:checked'
+  ).value;
   let separateRestroomScore = separateRestroom === "yes" ? 5 : 0;
-  
+
   // ไฟฟ้าต่อพ่วง
-  const powerAccess = document.querySelector('input[name="powerAccess"]:checked').value;
+  const powerAccess = document.querySelector(
+    'input[name="powerAccess"]:checked'
+  ).value;
   let powerAccessScore = powerAccess === "yes" ? 5 : 0;
 
   // สัญญาณโทรศัพท์ TRUE, DTAC, AIS
@@ -79,9 +87,12 @@ function calculateScore() {
   let cabinPriceScore = 0;
   if (cabins === "yes") {
     // ราคาบ้านพัก (สูงสุด 10 คะแนน)
-    const cabinPriceSmall = parseInt(document.getElementById("cabinPriceSmall").value) || 0;
-    const cabinPriceMedium = parseInt(document.getElementById("cabinPriceMedium").value) || 0;
-    const cabinPriceLarge = parseInt(document.getElementById("cabinPriceLarge").value) || 0;
+    const cabinPriceSmall =
+      parseInt(document.getElementById("cabinPriceSmall").value) || 0;
+    const cabinPriceMedium =
+      parseInt(document.getElementById("cabinPriceMedium").value) || 0;
+    const cabinPriceLarge =
+      parseInt(document.getElementById("cabinPriceLarge").value) || 0;
 
     cabinPriceScore += calculatePriceScore(cabinPriceSmall, 500, 1000); // ราคาเล็ก
     cabinPriceScore += calculatePriceScore(cabinPriceMedium, 1000, 2000); // ราคากลาง
@@ -94,9 +105,12 @@ function calculateScore() {
   let tentPriceScore = 0;
   if (rentalTents === "yes") {
     // ราคาเต้น (สูงสุด 10 คะแนน)
-    const tentPriceSmall = parseInt(document.getElementById("tentPriceSmall").value) || 0;
-    const tentPriceMedium = parseInt(document.getElementById("tentPriceMedium").value) || 0;
-    const tentPriceLarge = parseInt(document.getElementById("tentPriceLarge").value) || 0;
+    const tentPriceSmall =
+      parseInt(document.getElementById("tentPriceSmall").value) || 0;
+    const tentPriceMedium =
+      parseInt(document.getElementById("tentPriceMedium").value) || 0;
+    const tentPriceLarge =
+      parseInt(document.getElementById("tentPriceLarge").value) || 0;
 
     tentPriceScore += calculatePriceScore(tentPriceSmall, 100, 500); // ราคาเล็ก
     tentPriceScore += calculatePriceScore(tentPriceMedium, 500, 1000); // ราคากลาง
@@ -122,7 +136,9 @@ function calculateScore() {
     tentPriceScore;
 
   // แสดงผลลัพธ์
-  document.getElementById("result").innerHTML = `คะแนนรวม: ${parseInt(totalScore)}/100`;
+  document.getElementById("result").innerHTML = `Total score: ${parseInt(
+    totalScore
+  )}/100`;
 
   // เปิด modal
   openModal();
@@ -137,43 +153,51 @@ function calculatePriceScore(price, minPrice, maxPrice) {
 
 // ฟังก์ชันเปิด modal
 function openModal() {
-  const modal = document.getElementById('resultModal');
-  modal.style.display = 'flex';
+  const modal = document.getElementById("resultModal");
+  modal.style.display = "flex";
 }
 
 // ฟังก์ชันปิด modal
 function closeModal() {
-  const modal = document.getElementById('resultModal');
-  modal.style.display = 'none';
+  const modal = document.getElementById("resultModal");
+  modal.style.display = "none";
 }
 
 function toggleCabinPrice(show) {
-  const cabinPriceForm = document.getElementById('cabinPriceForm');
+  const cabinPriceForm = document.getElementById("cabinPriceForm");
   if (show) {
-    cabinPriceForm.classList.remove('hidden');
+    cabinPriceForm.classList.remove("hidden");
   } else {
-    cabinPriceForm.classList.add('hidden');
+    cabinPriceForm.classList.add("hidden");
   }
 }
 
 function toggleTentPrice(show) {
-  const tentPriceForm = document.getElementById('tentPriceForm');
+  const tentPriceForm = document.getElementById("tentPriceForm");
   if (show) {
-    tentPriceForm.classList.remove('hidden');
+    tentPriceForm.classList.remove("hidden");
   } else {
-    tentPriceForm.classList.add('hidden');
+    tentPriceForm.classList.add("hidden");
   }
 }
 
 // เรียก toggle ฟอร์มการกรอกราคาตามค่าที่เลือกใน radio button
-document.querySelectorAll('input[name="cabins"]').forEach(radio => {
-  radio.addEventListener('change', function () {
-    toggleCabinPrice(this.value === 'yes');
+document.querySelectorAll('input[name="cabins"]').forEach((radio) => {
+  radio.addEventListener("change", function () {
+    toggleCabinPrice(this.value === "yes");
   });
 });
 
-document.querySelectorAll('input[name="rentalTents"]').forEach(radio => {
-  radio.addEventListener('change', function () {
-    toggleTentPrice(this.value === 'yes');
+document.querySelectorAll('input[name="rentalTents"]').forEach((radio) => {
+  radio.addEventListener("change", function () {
+    toggleTentPrice(this.value === "yes");
   });
+});
+
+$('.navTrigger').click(function () {
+  $(this).toggleClass('active');
+  console.log("Clicked menu");
+  $("#mainListDiv").toggleClass("show_list");
+  $("#mainListDiv").fadeIn();
+
 });

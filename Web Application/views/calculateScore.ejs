@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="th">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Score Calculate</title>
+    <link rel="stylesheet" href="css/calculateScoreStyles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <nav>
+        <div class="menu">
+            <div class="menu_links">
+                <a href="/tool" class="link"><i class="fa-solid fa-arrow-left"></i></a>
+                <a href="/" class="link">Home</a>
+            </div>
+        </div>
+    </nav>
+
+    <div>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+    </div>
+
+    <form id="campForm">
+        <br>
+        <!-- ค่าเข้าผู้ใหญ่ -->
+        <label for="entryAdult">Adult Entry Fee (10 Point)</label>
+        <input type="number" class="custom-form" id="entryAdult" name="entryAdult" min="0">
+
+        <!-- ค่าเข้าเด็ก -->
+        <label for="entryChild">Child Entry Fee (5 Point)</label>
+        <input type="number" class="custom-form" id="entryChild" name="entryChild" min="0">
+
+        <!-- ค่าจอดรถ -->
+        <label for="parkingFee">Parking Fee (5 point)</label>
+        <input type="number" class="custom-form" id="parkingFee" name="parkingFee" min="0">
+
+        <!-- ค่ากางเต้น -->
+        <label for="tentFee">Camping Fee (5 Point)</label>
+        <input type="number" class="custom-form" id="tentFee" name="tentFee" min="0">
+
+        <!-- Radio "มีบ้านพัก" -->
+        <label>Accommodation Available (10 Point):</label><br>
+        <div>
+            <input type="radio" name="hasCabin" value="yes" onclick="toggleCabinPrice(true)"> Yes
+            <input type="radio" name="hasCabin" value="no" onclick="toggleCabinPrice(false)"> No<br><br>
+        </div>
+
+        <!-- ฟอร์มกรอกราคาบ้านพัก -->
+        <div id="cabinPriceForm" class="hidden">
+            <p>Overall price appropriateness (10 Points)</p>
+            <br>
+            <label>Small Size: </label>
+            <input type="number" class="custom-form" id="cabinPriceSmall" min="0"><br><br>
+            <label>Medium Size: </label>
+            <input type="number" class="custom-form" id="cabinPriceMedium" min="0"><br><br>
+            <label>Large Size: </label>
+            <input type="number" class="custom-form" id="cabinPriceLarge" min="0"><br><br>
+        </div>
+
+        <!-- Radio "มีเต้นบริการ" -->
+        <label>Tent Service (5 Point):</label><br>
+        <div>
+            <input type="radio" name="hasTentRental" value="yes" onclick="toggleTentPrice(true)"> Yes
+            <input type="radio" name="hasTentRental" value="no" onclick="toggleTentPrice(false)"> No<br><br>
+        </div>
+
+        <!-- ฟอร์มกรอกราคาเต้น -->
+        <div id="tentPriceForm" class="hidden">
+            <p>Overall price appropriateness (10 Points)</p>
+            <br>
+            <label>Small Size: </label>
+            <input type="number" class="custom-form" id="tentPriceSmall" min="0"><br><br>
+            <label>Medium Size: </label>
+            <input type="number" class="custom-form" id="tentPriceMedium" min="0"><br><br>
+            <label>Large Size: </label>
+            <input type="number" class="custom-form" id="tentPriceLarge" min="0"><br><br>
+        </div>
+
+        <!-- มีกิจกรรม -->
+        <label for="activities">Activity (10 Points)</label>
+        <input type="number" class="custom-form" id="activities" name="activities" min="0">
+
+        <!-- ห้องน้ำสะอาด -->
+        <label>Clean Restrooms (15 Points)</label>
+        <div class="radio-group">
+            <label><input type="radio" name="cleanRestroom" value="yes"> Yes</label>
+            <label><input type="radio" name="cleanRestroom" value="no"> No</label>
+        </div>
+
+        <!-- ห้องน้ำแยกชายหญิง -->
+        <label>Gender Separated Restrooms (5 Points)</label>
+        <div class="radio-group">
+            <label><input type="radio" name="separateRestroom" value="yes"> Yes</label>
+            <label><input type="radio" name="separateRestroom" value="no"> No</label>
+        </div>
+
+        <!-- ไฟฟ้าต่อพ่วง -->
+        <label>Power Access (5 Points)</label>
+        <div class="radio-group">
+            <label><input type="radio" name="powerAccess" value="yes"> Yes</label>
+            <label><input type="radio" name="powerAccess" value="no"> No</label>
+        </div>
+
+        <div>
+            <p>Phone Signal (5 Point)</p>
+            <!-- สัญญาณโทรศัพท์ TRUE -->
+            <label>TRUE</label>
+            <select id="signalTrue" class="custom-select" name="signalTrue">
+                <option value="good">Good</option>
+                <option value="average">Average</option>
+                <option value="bad">Bad</option>
+            </select>
+
+            <!-- สัญญาณโทรศัพท์ DTAC -->
+            <label>DTAC</label>
+            <select id="signalDtac" class="custom-select" name="signalDtac">
+                <option value="good">Good</option>
+                <option value="average">Average</option>
+                <option value="bad">Bad</option>
+            </select>
+
+            <!-- สัญญาณโทรศัพท์ AIS -->
+            <label>AIS</label>
+            <select id="signalAis" class="custom-select" name="signalAis">
+                <option value="good">Good</option>
+                <option value="average">Average</option>
+                <option value="bad">Bad</option>
+            </select>
+        </div>
+
+        <div class="button">
+            <button type="button" class="custom-button" onclick="calculateScore()">Calculate scores</button>
+        </div>
+        <br>
+    </form>
+
+    <!-- Popup Modal -->
+    <div id="resultModal" class="modal">
+        <div class="modal-content">
+            <span id="result"></span><br><br>
+            <button class="close-btn" onclick="closeModal()">Close</button>
+        </div>
+    </div>
+
+    <script src="js/calculateScoreScript.js"></script>
+
+</body>
+
+</html>
