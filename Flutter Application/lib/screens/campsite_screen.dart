@@ -247,7 +247,7 @@ class _CampsiteScreenState extends State<CampsiteScreen> {
           ),
           const SizedBox(height: 16.0),
           const Text(
-            'ค่ากางเต้น ⛺',
+            'ค่ากางเต็นท์ ⛺',
             style: TextStyle(
                 color: Color(0xFFFFFFFF),
                 fontSize: 21.0,

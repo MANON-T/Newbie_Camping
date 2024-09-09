@@ -162,7 +162,7 @@ class _BudgetState extends State<Budget> {
                         fontSize: 20, color: Colors.orange, fontFamily: 'Itim'),
                   ),
                   Text(
-                    'ค่าเช้าเต้นรวม: ฿${tentRental.toStringAsFixed(2)}',
+                    'ค่าเช้าเต็นท์รวม: ฿${tentRental.toStringAsFixed(2)}',
                     style: const TextStyle(
                         fontSize: 20, color: Colors.green, fontFamily: 'Itim'),
                   ),
@@ -172,7 +172,7 @@ class _BudgetState extends State<Budget> {
                         fontSize: 20, color: Colors.red, fontFamily: 'Itim'),
                   ),
                   Text(
-                    'ค่ากางเต้น: ฿${campingFee.toStringAsFixed(2)}',
+                    'ค่ากางเต็นท์: ฿${campingFee.toStringAsFixed(2)}',
                     style: const TextStyle(
                         fontSize: 20, color: Colors.purple, fontFamily: 'Itim'),
                   ),
