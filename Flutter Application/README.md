@@ -72,13 +72,13 @@ Android package name ของโปรเจคนี้คือ    `com.examp
 |ชื่อ|ชนิดข้อมูล|คำอธิบาย|ตัวอย่าง|
 |--|--|--|--|
 |House|array|ราคาบ้านพัก : โดยจะแบ่งเป็นราคาของบั้นพักขนาดเล็ก(2-3คน),กลาง(4-6คน),ใหญ่(8-10คน) โดยหากสถานที่นั้นไม่มีบ้านพักขนาดเล็ก,กลาง หรือขนาดใหญ่ ให้ใส่ค่าเป็น 0 โดยค่าของข้อมูลใน Array จะเป็นชนิด number|![enter image description here](https://github.com/MANON-T/Newbie_Camping/blob/main/Tutorial%20Material/campsite/House.png)|
-|Tent_rental|array|ราคาเต้นเช่า : มีลักษณะเหมือนกับ field House โดยจะแบ่งเป็นเต้นเช่าขนาดเล็ก(2คน),กลาง(4คน),ใหญ่(6คน) โดยหากสถานที่นั้นไม่มีเต้นเช่าขนาดเล็ก,กลาง หรือขนาดใหญ่ ให้ใส่ค่าเป็น 0 โดยค่าของข้อมูลใน Array จะเป็นชนิด number|![enter image description here](https://github.com/MANON-T/Newbie_Camping/blob/main/Tutorial%20Material/campsite/Tent_rental.png)|
+|Tent_rental|array|ราคาเต็นท์เช่า : มีลักษณะเหมือนกับ field House โดยจะแบ่งเป็นเต็นท์เช่าขนาดเล็ก(2คน),กลาง(4คน),ใหญ่(6คน) โดยหากสถานที่นั้นไม่มีเต็นท์เช่าขนาดเล็ก,กลาง หรือขนาดใหญ่ ให้ใส่ค่าเป็น 0 โดยค่าของข้อมูลใน Array จะเป็นชนิด number|![enter image description here](https://github.com/MANON-T/Newbie_Camping/blob/main/Tutorial%20Material/campsite/Tent_rental.png)|
 |accommodation_available|boolean|มีบ้านพัก : true , ไม่มีบ้านพัก : false|![enter image description here](https://github.com/MANON-T/Newbie_Camping/blob/main/Tutorial%20Material/campsite/accommodation_available.png)|
 |activities|array|กิจกรรม : เก็บข้อมูลเกี่ยวกับกิจกรรมภายในสถานที่นั้นๆ โดยข้อมูลใน Array จะเป็น String|![enter image description here](https://github.com/MANON-T/Newbie_Camping/blob/main/Tutorial%20Material/campsite/activities.png)|
 |adult_entry_fee|number|ค่าเข้าผู้ใหญ่ : หากสถานที่นั้นไม่เก็บค่าเข้าของผู้ใหญ่ให้ใส่ค่าเป็น 0|![enter image description here](https://github.com/MANON-T/Newbie_Camping/blob/main/Tutorial%20Material/campsite/adult_entry_fee.png)|
 |camp_score|number|คะแนนแคมป์ : การนำ factor หรือปัจจัยที่เกี่ยวข้องมาจัดเป็นคะแนนโดยวิธีการคำนวนจะอยู่ที่เนื้อหาด้านล่าง|![enter image description here](https://github.com/MANON-T/Newbie_Camping/blob/main/Tutorial%20Material/campsite/camp_score.png)|
 |campimage|array|รูปภาพแคมป์ : โดยการเก็บรูปภาพจะถูกเก็บไว้ในโฟลเดอร์ images ดังนั้นการบันทึกจะเป็นการบันทึกรูปแบบ String ของ path ที่เก็บรูปภาพไว้ใน Firebase Storage|![enter image description here](https://github.com/MANON-T/Newbie_Camping/blob/main/Tutorial%20Material/campsite/campimage.png)|
-|camping_fee|number|ค่ากางเต้น : หากสถานที่นั้นไม่เก็บค่ากางเต้นให้ใส่ค่าเป็น 0|![enter image description here](https://github.com/MANON-T/Newbie_Camping/blob/main/Tutorial%20Material/campsite/camping_fee.png)|
+|camping_fee|number|ค่ากางเต็นท์ : หากสถานที่นั้นไม่เก็บค่ากางเต็นท์ให้ใส่ค่าเป็น 0|![enter image description here](https://github.com/MANON-T/Newbie_Camping/blob/main/Tutorial%20Material/campsite/camping_fee.png)|
 |child_entry_fee|number|ค่าเข้าเด็ก : หากสถานที่นั้นไม่เก็บค่าเข้าของเด็กให้ใส่ค่าเป็น 0|![enter image description here](https://github.com/MANON-T/Newbie_Camping/blob/main/Tutorial%20Material/campsite/child_entry_fee.png)|
 |clean_restrooms|boolean|ห้องน้ำสะอาด : true , ห้องน้ำไม่สะอาด : false|![enter image description here](https://github.com/MANON-T/Newbie_Camping/blob/main/Tutorial%20Material/campsite/clean_restrooms.png)|
 |common_backpack1|array|กระเป๋าสำหรับคนทั่วไป1 : เก็บข้อมูลของที่ควรเตรียมสำหรับไปยังสถานที่นั้นๆ โดยเก็บข้อมูลเป็น String โดยจะมีข้อมูลกี่รายการก็ได้|![enter image description here](https://github.com/MANON-T/Newbie_Camping/blob/main/Tutorial%20Material/campsite/common_backpack1.png)|
@@ -93,7 +93,7 @@ Android package name ของโปรเจคนี้คือ    `com.examp
 |power_access|boolean|มีไฟฟ้าต่อพ่วง : true , ไม่มีไฟฟ้าต่อพ่วง : false|![enter image description here](https://github.com/MANON-T/Newbie_Camping/blob/main/Tutorial%20Material/campsite/power_access.png)|
 |sugges_tag|array|แท็กแนะนำ : สำหรับเก็บข้อมูลที่เกี่ยวข้องเพื่อนำข้อมูลมาคัดกรองสำหรับการแนะนำ โดยจำกัดเพียง 3 แท็กเท่านั้น ซึ่งจะเป็นแท็กเดียวกับแท็กทั้งหมดที่ผู้ใช้สามารถเลือกได้|![enter image description here](https://github.com/MANON-T/Newbie_Camping/blob/main/Tutorial%20Material/campsite/sugges_tag.png)|
 |tag|array|แท็กค้นหา : สำหรับเก็บข้อมูลที่เกี่ยวข้องเพื่อนำข้อมูลมาคัดกรองสำหรับการค้นหา|![enter image description here](https://github.com/MANON-T/Newbie_Camping/blob/main/Tutorial%20Material/campsite/tag.png)|
-|tent_service|boolean|มีเต้นให้เช่า : true , ไม่มีเต้นให้เช่า : false|![enter image description here](https://github.com/MANON-T/Newbie_Camping/blob/main/Tutorial%20Material/campsite/tent_service.png)|
+|tent_service|boolean|มีเต็นท์ให้เช่า : true , ไม่มีเต็นท์ให้เช่า : false|![enter image description here](https://github.com/MANON-T/Newbie_Camping/blob/main/Tutorial%20Material/campsite/tent_service.png)|
 |warning|array|คำเตือน : เก็บข้อมูลคำเตือนของแต่ละสถานที่เป็น String|![enter image description here](https://github.com/MANON-T/Newbie_Camping/blob/main/Tutorial%20Material/campsite/warning.png)|
 
  2. tip
@@ -110,7 +110,7 @@ Android package name ของโปรเจคนี้คือ    `com.examp
 |ชื่อ|ชนิดข้อมูล|คำอธิบาย|ตัวอย่าง|
 |--|--|--|--|
 |backpack|string|กระเป๋าสัมภาระ : ประเภทกระเป๋าที่ผู้ใช้ได้เลือก|![enter image description here](https://github.com/MANON-T/Newbie_Camping/blob/main/Tutorial%20Material/user/backpack.png)|
-|campingFee|number|ค่ากางเต้นของสถานที่ๆผู้ใช้ได้เลือกไว้|![enter image description here](https://github.com/MANON-T/Newbie_Camping/blob/main/Tutorial%20Material/user/campingFee.png)|
+|campingFee|number|ค่ากางเต็นท์ของสถานที่ๆผู้ใช้ได้เลือกไว้|![enter image description here](https://github.com/MANON-T/Newbie_Camping/blob/main/Tutorial%20Material/user/campingFee.png)|
 |campsite|string|ชื่อสถานที่ๆผู้ใช้ได้เลือกไว้|![enter image description here](https://github.com/MANON-T/Newbie_Camping/blob/main/Tutorial%20Material/user/campsite.png)|
 |email|string|อีเมลของผู้ใช้ที่ใช้ทำการเข้าสู่ระบบทั้งนี้หากผู้ใช้เข้าสู่ระบบโดยไม่ระบุตัวตนข้อมูลนี้จะเก็บเป็น String คำว่า "ไม่ระบุตัวตน"|![enter image description here](https://github.com/MANON-T/Newbie_Camping/blob/main/Tutorial%20Material/user/email.png)|
 |enterFee|number|ค่าเข้าของสถานที่ๆผู้ใช้ได้เลือกไว้|![enter image description here](https://github.com/MANON-T/Newbie_Camping/blob/main/Tutorial%20Material/user/enterFee.png)|
@@ -118,7 +118,7 @@ Android package name ของโปรเจคนี้คือ    `com.examp
 |house|number|ค่าเช่าบ้านพักของสถานที่ๆผู้ใช้ได้เลือกไว้|![enter image description here](https://github.com/MANON-T/Newbie_Camping/blob/main/Tutorial%20Material/user/house.png)|
 |id|string|ไอดีของผู้ใช้|![enter image description here](https://github.com/MANON-T/Newbie_Camping/blob/main/Tutorial%20Material/user/id.png)|
 |name|string|ชื่อของผู้ใช้|![enter image description here](https://github.com/MANON-T/Newbie_Camping/blob/main/Tutorial%20Material/user/name.png)|
-|tentRental|number|ค่าเช่าเต้นของสถานที่ๆผู้ใช้ได้เลือกไว้|![enter image description here](https://github.com/MANON-T/Newbie_Camping/blob/main/Tutorial%20Material/user/tentRental.png)|
+|tentRental|number|ค่าเช่าเต็นท์ของสถานที่ๆผู้ใช้ได้เลือกไว้|![enter image description here](https://github.com/MANON-T/Newbie_Camping/blob/main/Tutorial%20Material/user/tentRental.png)|
 |totalCost|number|ค่ารวมของสถานที่ๆผู้ใช้ได้เลือกไว้|![enter image description here](https://github.com/MANON-T/Newbie_Camping/blob/main/Tutorial%20Material/user/totalCost.png)|
 |tag|array|แท็กของผู้ใช้ : เมื่อเริ่มต้นฟิลด์นี้จะเป็น array ที่มีค่าว่าง โดยจะถูกเพิ่มค่าจากการกดเลือกแท็กผ่านตัวแอป ข้อมูลว่ามีเท็กอะไรบ้างจะแยู่ในหัวข้อถัดๆไป|![enter image description here](https://github.com/MANON-T/Newbie_Camping/blob/main/Tutorial%20Material/user/tag.png)|
 |avatar|string|รูปโปรไฟล์ : เก็บ path สำหรับรูปโปรไฟล์ของผู้ใช้ สำหรับรูปโปรไฟล์จะถูกเก็บไว้ในตัวโปรเจคไม่ใช้ Firebase Storage จึงไม่จำเป็นต้องอ้างอิงถึงโฟลเดอร์ใน Firebase Storage|![enter image description here](https://github.com/MANON-T/Newbie_Camping/blob/main/Tutorial%20Material/user/avatar.png)|
@@ -194,20 +194,20 @@ Android package name ของโปรเจคนี้คือ    `com.examp
 1. ค่าเข้าผู้ใหญ่ (Entry fee for adults) - 10 คะแนน
 2. ค่าเข้าเด็ก (Entry fee for children) - 5 คะแนน
 3. ค่าจอดรถ (Parking fee) - 5 คะแนน
-4. ค่ากางเต้น (Tent pitching fee) - 5 คะแนน
+4. ค่ากางเต็นท์ (Tent pitching fee) - 5 คะแนน
 5. มีบ้านพัก (Availability of cabins) - 10 คะแนน
-6. มีเต้นบริการ (Availability of rental tents) - 5 คะแนน
+6. มีเต็นท์บริการ (Availability of rental tents) - 5 คะแนน
 7. มีกิจกรรม (Availability of activities) - 10 คะแนน
 8. ห้องน้ำสะอาด (Cleanliness of restrooms) - 15 คะแนน
 9. ห้องน้ำแยกชายหญิง (Separate restrooms for men and women) - 5 คะแนน
 10. สัญญาณโทรศัพท์ (Mobile phone signal) - 5 คะแนน
 11. ไฟฟ้าต่อพ่วง (Electricity hook-ups) - 5 คะแนน
 12. ราคาบ้านพัก (Cabin price) - 10 คะแนน
-13. ราคาเต้น (Tent price) - 10 คะแนน
+13. ราคาเต็นท์ (Tent price) - 10 คะแนน
 
 คะแนนรวมทั้งหมด: 100 คะแนน
 
-ปัจจัยที่สำคัญที่สุดคือความสะอาดของห้องน้ำซึ่งมีผลต่อความสะดวกสบายและสุขอนามัย โดยให้คะแนนสูงถึง 15 คะแนน ส่วนปัจจัยอื่นๆที่สำคัญเช่น ค่าเข้าผู้ใหญ่, มีบ้านพัก, มีกิจกรรม, ราคาบ้านพัก, และราคาเต้น ได้รับคะแนน 10 คะแนนแต่ละปัจจัย เนื่องจากส่งผลต่อการเลือกสถานที่ตั้งแคมป์เป็นอย่างมาก ส่วนปัจจัยอื่นๆที่มีความสำคัญรองลงมาได้รับคะแนนตามความสำคัญลดหลั่นลงมา
+ปัจจัยที่สำคัญที่สุดคือความสะอาดของห้องน้ำซึ่งมีผลต่อความสะดวกสบายและสุขอนามัย โดยให้คะแนนสูงถึง 15 คะแนน ส่วนปัจจัยอื่นๆที่สำคัญเช่น ค่าเข้าผู้ใหญ่, มีบ้านพัก, มีกิจกรรม, ราคาบ้านพัก, และราคาเต็นท์ ได้รับคะแนน 10 คะแนนแต่ละปัจจัย เนื่องจากส่งผลต่อการเลือกสถานที่ตั้งแคมป์เป็นอย่างมาก ส่วนปัจจัยอื่นๆที่มีความสำคัญรองลงมาได้รับคะแนนตามความสำคัญลดหลั่นลงมา
 
 > แท็กทั้งหมดที่ผู้ใช้สามารถเลือกได้
 
