@@ -41,6 +41,10 @@ storageBucket คือส่วนที่ใช้อ้างอิงถึ
 สำหรับโปรเจคนี้จะมีการดึงรูปภาพส่วนใหญ่มาจาก Firebase Storage ซึ่งจะเป็นการสร้างลิงค์ชั่วคราวสำหรับเข้าถึงรูปภาพโดยลิงค์สามารถหมดอายุได้ดังนั้นจึงแนะนำให้ตรวจสอบและแก้ไขวันหมดอายุของลิงค์เพื่อความสมบูรณ์ของโปรเจค โดยสามารถแก้ไขได้ที่ไฟล์ myroute.js ที่โฟลเดอร์ routes ของโปรเจค![enter image description here](https://github.com/MANON-T/Newbie_Camping/blob/main/Tutorial%20Material/Web%20Application/expires_change_1.png)
 เมื่อเข้าสูไฟล์ myroute.js แล้ว ให้กด Ctrl + F เพื่อเป็นการค้นหาคำจากนั้นพิมพ์คำว่า expires ที่ช้องค้นหา ที่แถบค้นหาจะมีลูกศร ขึ้น-ลง ให้ใช้งานในการไปยังตำแหน่งของคำที่ค้นหา เมื่อพบเจอส่วนของ expires แล้วให้แก้ไขวันหมดอายุโดยยึดตามรูปแบบเดิมของโค้ดไว้![enter image description here](https://github.com/MANON-T/Newbie_Camping/blob/main/Tutorial%20Material/Web%20Application/expires_change_2.png)
 
+> ข้อควรระวังในการเพิ่มข้อมูลสถานที่และเกล็ดความรู้
+
+การเพิ่มข้อมูลทั้งสองนั้นจำเป็นต้องเพิ่มข้อมูลให้ครบตามที่ระบบต้องการ เพื่อหลีกเลี่ยงความผิดพลาดในการดึงลำดับของข้อมูล
+
 > ข้อควรระวังในการใช้งานการอัพโหลดรูปภาพใหม่ผ่านการอัปโหลดทางหน้า Gallery
 
 ส่วนนี้เป็นส่วนสำคัญจึงอยากจะขอเตือนไว้ว่าการอัปโหลดรูปภาพใดๆ ผ่านหน้า Gallery นั้นต้องเป็นไฟล์ .png เท่านั้น![enter image description here](https://github.com/MANON-T/Newbie_Camping/blob/main/Tutorial%20Material/Web%20Application/gallery_upload_warning.png)
