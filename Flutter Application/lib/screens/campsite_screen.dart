@@ -451,9 +451,7 @@ class _CampsiteScreenState extends State<CampsiteScreen> {
             const Text(
               'ไม่พบข้อมูล',
               style: TextStyle(
-                color: Color(0xFFB3B3B3),
-                fontSize: 15.0,
-              ),
+                  color: Color(0xFFB3B3B3), fontSize: 17.0, fontFamily: 'Itim'),
             )
           else
             ListView.builder(
