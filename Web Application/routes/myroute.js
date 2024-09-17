@@ -545,31 +545,56 @@ router.post("/updatens/:campsiteName", async (req, res) => {
   const snapshot = await CampsiteRef.where("name", "==", campsiteName).get();
   const MedalRef = db.collection("medal");
   const snapshot1 = await MedalRef.where("name", "==", campsiteName).get();
+
   const name = req.body.name;
+  const old_name = req.body.old_name;
   const score = Number(req.body.score);
 
   console.log(name, score);
+  console.log("Old Name:", old_name);
 
   // ทำการบันทึก tags ลงในฐานข้อมูล
   const campsiteId = snapshot.docs[0].id;
+  const campsiteData = snapshot.docs[0].data();
   const medalId = snapshot1.docs[0].id;
-  // ตัวอย่างเช่นการอัปเดต Firestore:
+
+  // คัดลอกเนื้อหาจากโฟลเดอร์ old_name ไปยังโฟลเดอร์ใหม่
+  const [files] = await Firestorage.getFiles({ prefix: `${old_name}` });
+  for (const file of files) {
+    const newFileName = file.name.replace(`${old_name}`, `${name}`);
+    await Firestorage.file(file.name).copy(Firestorage.file(newFileName));
+  }
+
+  // ลบโฟลเดอร์เก่า
+  await Promise.all(files.map((file) => file.delete()));
+
+  // อัปเดต Firestore
   const medalRef = db.collection("medal").doc(medalId);
-  await medalRef.update({
-    name: name,
-  });
-  const campsiteRef = db.collection("campsite").doc(campsiteId);
-  await campsiteRef
-    .update({
-      name: name,
-      camp_score: score,
-    })
-    .then(() => {
-      res.redirect("/campsite");
-    })
-    .catch((error) => {
-      console.error("Error updating tags:", error);
+  await medalRef.update({ name: name });
+
+  if (Array.isArray(campsiteData.campimage)) {
+    const updatedImages = campsiteData.campimage.map((imagePath) => {
+      return imagePath.replace(old_name, name); // เปลี่ยน old_name เป็น name ในพาทของรูปภาพ
     });
+
+    const updatedImagePath = campsiteData.imageURL.replace(old_name, name); // แทนที่ old_name ด้วย name ในฟิลด์ที่เป็น string
+
+    // อัปเดตฟิลด์ campimage ใน Firestore
+    const campsiteRef = db.collection("campsite").doc(campsiteId);
+    await campsiteRef
+      .update({
+        campimage: updatedImages,
+        imageURL: updatedImagePath,
+        name: name,
+        camp_score: score,
+      })
+      .then(() => {
+        res.redirect("/campsite");
+      })
+      .catch((error) => {
+        console.error("Error updating tags:", error);
+      });
+  }
 });
 
 router.post(

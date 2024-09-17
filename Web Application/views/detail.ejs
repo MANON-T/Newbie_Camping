@@ -92,6 +92,7 @@
                     <br>
                     <form action="/updatens/<%= campsite.name %>" method="post" id="ns-form">
                         <label for="">Name:</label>
+                        <input type="hidden" name="old_name" value="<%= campsite.name %>">
                         <input type="text" name="name" id="" value="<%= campsite.name %>">
                         <br>
                         <label for="">Score: </label>
