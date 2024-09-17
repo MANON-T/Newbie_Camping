@@ -543,6 +543,8 @@ router.post("/updatens/:campsiteName", async (req, res) => {
   const campsiteName = req.params.campsiteName;
   const CampsiteRef = db.collection("campsite");
   const snapshot = await CampsiteRef.where("name", "==", campsiteName).get();
+  const MedalRef = db.collection("medal");
+  const snapshot1 = await MedalRef.where("name", "==", campsiteName).get();
   const name = req.body.name;
   const score = Number(req.body.score);
 
@@ -550,7 +552,12 @@ router.post("/updatens/:campsiteName", async (req, res) => {
 
   // ทำการบันทึก tags ลงในฐานข้อมูล
   const campsiteId = snapshot.docs[0].id;
+  const medalId = snapshot1.docs[0].id;
   // ตัวอย่างเช่นการอัปเดต Firestore:
+  const medalRef = db.collection("medal").doc(medalId);
+  await medalRef.update({
+    name: name,
+  });
   const campsiteRef = db.collection("campsite").doc(campsiteId);
   await campsiteRef
     .update({
@@ -1135,15 +1142,17 @@ router.post(
             },
           });
           imageURL = filePath; // อัปเดต imageURL เป็นเส้นทางใหม่
-        }else{
-          const filePath = `ตราปั๋ม/${name}/unlock${path.extname(imageFile.originalname)}`;
-        const fileUpload = Firestorage.file(filePath);
-        await fileUpload.save(imageFile.buffer, {
-          metadata: {
-            contentType: filePath.mimetype,
-          },
-        });
-        imageURL = filePath; // อัปเดต imageURL เป็นเส้นทางใหม่
+        } else {
+          const filePath = `ตราปั๋ม/${name}/unlock${path.extname(
+            imageFile.originalname
+          )}`;
+          const fileUpload = Firestorage.file(filePath);
+          await fileUpload.save(imageFile.buffer, {
+            metadata: {
+              contentType: filePath.mimetype,
+            },
+          });
+          imageURL = filePath; // อัปเดต imageURL เป็นเส้นทางใหม่
         }
       }
 
@@ -1165,17 +1174,17 @@ router.post(
   }
 );
 
-router.get('/tool', (req, res) => {
-  res.render('tool')
-})
+router.get("/tool", (req, res) => {
+  res.render("tool");
+});
 
-router.get('/tooltype', (req, res) => {
-  const tooltype = req.query.tooltype
+router.get("/tooltype", (req, res) => {
+  const tooltype = req.query.tooltype;
   try {
     if (tooltype === "Calculator") {
-      res.render('calculateScore')
-    }else{
-      res.render('getLockImg')
+      res.render("calculateScore");
+    } else {
+      res.render("getLockImg");
     }
   } catch (error) {
     console.error("Error getting", error);
