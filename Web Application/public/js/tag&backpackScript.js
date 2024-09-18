@@ -44,6 +44,7 @@ function refreshOptions() {
     "มีสัญญาณค่าย True",
     "มีสัญญาณค่าย Ais",
     "มีสัญญาณค่าย Dtac",
+    "ห้องน้ำแยกชายหญิง"
   ];
 
   const selectionElement = document.getElementById("selection");

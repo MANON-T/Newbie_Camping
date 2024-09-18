@@ -103,6 +103,11 @@ class Suggestion extends StatelessWidget {
         'color': Colors.teal.shade200,
         'tag': 'มีสัญญาณค่าย Dtac'
       },
+      {
+        'text': 'ห้องน้ำแยกชายหญิง',
+        'color': Colors.green.shade200,
+        'tag': 'ห้องน้ำแยกชายหญิง'
+      },
     ];
 
     // Filtering buttons based on the value of Exp
