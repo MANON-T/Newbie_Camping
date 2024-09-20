@@ -159,18 +159,6 @@ class _TagResultsScreenState extends State<TagResultsScreen> {
                               );
                             }
                           }),
-                      if (index == 0)
-                        const Padding(
-                          padding: EdgeInsets.symmetric(vertical: 4.0),
-                          child: Text(
-                            '✨ แนะนำ',
-                            style: TextStyle(
-                              fontSize: 17.0,
-                              color: kSpotifyAccent,
-                              fontFamily: 'Itim',
-                            ),
-                          ),
-                        ),
                       ListTile(
                         contentPadding: const EdgeInsets.symmetric(
                           vertical: 4.0,
@@ -181,14 +169,6 @@ class _TagResultsScreenState extends State<TagResultsScreen> {
                           style: const TextStyle(
                             color: kSpotifyTextPrimary,
                             fontSize: 17.0,
-                            fontFamily: 'Itim',
-                          ),
-                        ),
-                        subtitle: Text(
-                          'คะแนน: ${campsite.campscore}',
-                          style: const TextStyle(
-                            color: kSpotifyTextSecondary,
-                            fontSize: 14.0,
                             fontFamily: 'Itim',
                           ),
                         ),

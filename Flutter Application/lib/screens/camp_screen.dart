@@ -661,7 +661,7 @@ class CampsiteSearchDelegate extends SearchDelegate {
             return const Center(
               child: Text(
                 'ไม่พบผลลัพธ์',
-                style: TextStyle(color: Colors.white),
+                style: TextStyle(color: Colors.white , fontFamily: 'Itim' , fontSize: 17),
               ),
             );
           }
