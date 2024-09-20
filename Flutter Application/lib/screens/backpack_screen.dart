@@ -164,7 +164,7 @@ class _BackpackState extends State<Backpack> {
               itemBuilder: (context, index) {
                 return Padding(
                   padding: const EdgeInsets.only(
-                    top: 50.0,
+                    top: 7.0,
                     bottom: 16.0,
                     left: 16.0,
                     right: 16.0,
@@ -204,7 +204,7 @@ class _BackpackState extends State<Backpack> {
                                     Center(
                                       child: Image.asset(
                                         'images/camping.png',
-                                        height: 150,
+                                        height: 130,
                                       ),
                                     ),
                                     const SizedBox(height: 8.0),
@@ -341,11 +341,11 @@ class _BackpackState extends State<Backpack> {
                                         child: index == 1
                                             ? Image.asset(
                                                 'images/camping-chair.png',
-                                                height: 150,
+                                                height: 130,
                                               )
                                             : Image.asset(
                                                 'images/camping_1.png',
-                                                height: 150,
+                                                height: 130,
                                               )),
                                     const SizedBox(height: 8.0),
                                     Expanded(
@@ -535,8 +535,7 @@ class _BackpackState extends State<Backpack> {
                                           Image.network(
                                             imageUrl,
                                             fit: BoxFit.cover,
-                                            height: 140,
-                                            width: 210,
+                                            height: 150,
                                           ),
                                         ],
                                       );
