@@ -1,5 +1,6 @@
 
 
+
 # Flutter Application
 สำหรับนักพัฒนาที่ต้องการจะอัปเดท ปรับปรุง หรือแก้ไขโค้ดของตัวแอป
 
@@ -13,7 +14,7 @@ Android package name ของโปรเจคนี้คือ    `com.examp
 
 ![enter image description here](https://github.com/MANON-T/Newbie_Camping/blob/main/Tutorial%20Material/Firebase%20Storage%20bar/File.png)
 
-เป็นบริการในการจัดเก็บไฟล์ของทาง Firebase เราจะนำไฟล์รูปภาพที่จำเป็นย้ายมาเก็บไว้ในนี้ เนื่องจาก Flutter นั้นต้อง Build ใหม่ทุกครั้งที่มีการเปลี่ยนแปลงของโด้ดทำให้ไม่ยืดหยุ่นพอหากจะเก็บไฟล์รูปภาพที่มีการเปลี่ยนแปลงบ่อยไว้ในโฟล์เดอร์ image โดยรูปภาพที่จะจัดเก็บใน Firebase  Storage นั้นตัวผู้เขียนได้อัพลงโฟลเดอร์ Firebase Storage แล้วสามารถดาวน์โหลดไปใช้งานได้เลย โดยจะมีอยู่ 3 ส่วน
+เป็นบริการในการจัดเก็บไฟล์ของทาง Firebase เราจะนำไฟล์รูปภาพที่จำเป็นย้ายมาเก็บไว้ในนี้ เนื่องจาก Flutter นั้นต้อง Build ใหม่ทุกครั้งที่มีการเปลี่ยนแปลงของโด้ดทำให้ไม่ยืดหยุ่นพอหากจะเก็บไฟล์รูปภาพที่มีการเปลี่ยนแปลงบ่อยไว้ในโฟล์เดอร์ image โดยรูปภาพที่จะจัดเก็บใน Firebase  Storage นั้นตัวผู้เขียนได้อัพลงโฟลเดอร์ [Firebase Storage](https://github.com/MANON-T/Newbie_Camping/tree/main/Firebase%20Storage) แล้วสามารถดาวน์โหลดไปใช้งานได้เลย โดยจะมีอยู่ 3 ส่วน
 
 1. รูปภาพของสถานที่ จะมีรูปแบบการจัดเก็บเป็น `ชื่อสถานที่/` จากนั้นจึงนำรูปภาพไปเก็บไว้ในโฟล์เดอร์นั้นๆ 
 ![enter image description here](https://github.com/MANON-T/Newbie_Camping/blob/main/Tutorial%20Material/Firebase%20Storage/camp_folder_ex.png)
