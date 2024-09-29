@@ -848,7 +848,6 @@ class _AccountScreenState extends State<AccountScreen> {
                           color: kSpotifyAccent,
                           fontSize: 16.0,
                           fontFamily: 'Itim',
-                          decoration: TextDecoration.underline,
                         ),
                       ),
                     ],

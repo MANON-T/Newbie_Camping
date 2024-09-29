@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import '../service/auth_service.dart';
+import '../screens/forgotPasswordScreen.dart';
 
 const kLoginStyle = TextStyle(
     fontSize: 30,
@@ -174,7 +175,9 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget _buildContent() {
     return _isLoading
         ? const Center(
-            child: CircularProgressIndicator(color: Colors.green,))
+            child: CircularProgressIndicator(
+            color: Colors.green,
+          ))
         : Column(
             children: [
               Text(
@@ -183,7 +186,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 textAlign: TextAlign.center,
               ),
               _buildErrorText(),
-              const SizedBox(height: 30),
+              const SizedBox(height: 5),
               _buildEmailLoginForm(),
               const SizedBox(height: 20),
               _buildSwitchButtons(),
@@ -274,6 +277,31 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ],
             ),
+            const SizedBox(height: 10),
+            !_isRegister ?
+            Align(
+              alignment: Alignment.centerRight,
+              child: TextButton(
+                onPressed: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => ForgotPasswordScreen(),
+                    ),
+                  );
+                },
+                child: const Text(
+                  'ลืมรหัสผ่าน?',
+                  style: TextStyle(
+                    fontFamily: 'Itim',
+                    fontSize: 17,
+                    // fontWeight: FontWeight.bold,
+                    color: Colors.green,
+                  ),
+                ),
+              ),
+            )
+            :
             const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () async {
